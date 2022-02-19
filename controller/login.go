@@ -1,7 +1,7 @@
 /*
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:43
- * @LastEditTime: 2022-02-18 17:27:38
+ * @LastEditTime: 2022-02-18 22:46:27
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \go-study\src\controller\login.go
@@ -19,37 +19,31 @@ import (
 
 func Login(c *gin.Context) {
 
-	// 写入一条用户
-	// user := models.User{
-	// 	Username:  "boyyang-love",
-	// 	Password:  "1234567",
-	// 	AvaterUrl: "url:jjjjjj",
-	// 	Age:       18,
-	// 	Sex:       "man",
-	// }
-	// setupDatabase.DB.Create(&user)
+	username := c.PostForm("name")
+	password := c.PostForm("password")
 
-	// 写入一条文章
-	// articel := models.Article{
-	// 	Title:    "JavaScript学习教程",
-	// 	Subtitle: "JavaScript",
-	// 	Content:  "涛涛涛涛",
-	// 	UserID:   1,
-	// }
-	// setupDatabase.DB.Create(&articel)
+	if username != "" && password != "" {
+		var user models.User
+		err := setupDatabase.DB.Where("Username = ?", username).First(&user).Error
+		if err == nil {
+			if user.Password == utils.MD5(password) {
+				token, _ := utils.GenerateToken(user.Username, user.Password, int(user.ID))
 
-	// 关联查询 一条
-	// var list models.Article
-	// setupDatabase.DB.Preload("Author").First(&list)
+				userMes := map[string]interface{}{
+					"info":  &user,
+					"token": token,
+				}
+				utils.ReturnData(200, userMes, c)
+			} else {
+				utils.ReturnData(200, "密码错误", c)
+			}
+		} else {
+			utils.ReturnData(200, "不存在该用户", c)
+		}
+	} else {
+		utils.ReturnData(200, "用户名和密码为必填项", c)
+	}
 
-	// 查询所有 user
-	var list []models.Article
-	setupDatabase.DB.Preload("Author").Find(&list)
-
-	c.JSON(200, gin.H{
-		"code":    200,
-		"message": list,
-	})
 }
 
 func Register(c *gin.Context) {

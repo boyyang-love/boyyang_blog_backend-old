@@ -1,7 +1,7 @@
 /*
  * @Author: boyyang
  * @Date: 2022-02-14 10:43:46
- * @LastEditTime: 2022-02-18 14:47:44
+ * @LastEditTime: 2022-02-19 10:56:21
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \go-study\src\setupDatabase\mysql.go
@@ -48,6 +48,7 @@ func SetupDB() *gorm.DB {
 
 	DB.AutoMigrate(&models.User{})
 	DB.AutoMigrate(&models.Article{})
+	DB.AutoMigrate(&models.Upload{})
 
 	return DB
 }

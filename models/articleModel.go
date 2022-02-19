@@ -1,10 +1,10 @@
 /*
  * @Author: boyyang
  * @Date: 2022-02-14 16:23:26
- * @LastEditTime: 2022-02-16 09:30:55
+ * @LastEditTime: 2022-02-19 10:34:08
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\websit\models\articleModel.go
+ * @FilePath: \go-study\src\models\articleModel.go
  */
 
 package models
