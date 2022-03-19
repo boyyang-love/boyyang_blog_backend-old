@@ -10,6 +10,7 @@
 package middleware
 
 import (
+	"net/http"
 	"websit/utils"
 
 	"github.com/gin-gonic/gin"
@@ -21,13 +22,13 @@ func TokenVerification() gin.HandlerFunc {
 		token := c.Request.Header["Token"]
 
 		if len(token) == 0 {
-			// utils.ReturnData(100, "缺少token", c)
+			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "缺少token"}, nil))
 			c.Abort()
 			return
 		} else {
 			_, err := utils.ParseToken(token[0])
 			if err != nil {
-				// utils.ReturnData(205, "token 验证失败", c)
+				c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "token验证失败"}, nil))
 				c.Abort()
 				return
 			}
