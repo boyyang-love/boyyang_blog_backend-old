@@ -1,4 +1,4 @@
-/*
+/**
  * @Author: boyyang
  * @Date: 2022-02-13 20:12:12
  * @LastEditTime: 2022-02-18 17:54:23
@@ -16,9 +16,9 @@ import (
 )
 
 func LoginRouterInit(r *gin.Engine) {
-	loginRouters := r.Group("login")
+	loginRouters := r.Group("api")
 	{
-		loginRouters.POST("/", controller.Login)
+		loginRouters.POST("login", controller.Login)
 
 		loginRouters.POST("register", controller.Register)
 	}

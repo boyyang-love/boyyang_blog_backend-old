@@ -1,4 +1,4 @@
-/*
+/**
  * @Author: boyyang
  * @Date: 2022-02-16 15:14:21
  * @LastEditTime: 2022-02-16 15:26:32
@@ -9,15 +9,20 @@
 
 package utils
 
-import (
-	"net/http"
+type Code struct {
+	Code int
+	Msg  string
+}
+type ReturnMsg struct {
+	Code int         `json:"code"`
+	Msg  string      `json:"msg"`
+	Data interface{} `json:"data"`
+}
 
-	"github.com/gin-gonic/gin"
-)
-
-func ReturnData(code int, data interface{}, c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"code": code,
-		"data": data,
-	})
+func RetunMsgFunc(code Code, data interface{}) *ReturnMsg {
+	rm := new(ReturnMsg)
+	rm.Code = code.Code
+	rm.Msg = code.Msg
+	rm.Data = data
+	return rm
 }

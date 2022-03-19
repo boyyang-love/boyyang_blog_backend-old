@@ -1,4 +1,4 @@
-/*
+/**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
  * @LastEditTime: 2022-02-19 11:59:10
@@ -10,6 +10,7 @@
 package controller
 
 import (
+	"fmt"
 	"path"
 	"websit/models"
 	"websit/setupDatabase"
@@ -36,17 +37,19 @@ func Upload(c *gin.Context) {
 		err := setupDatabase.DB.Create(&upload).Error
 
 		if err != nil {
-			utils.ReturnData(200, err, c)
+			// utils.ReturnData(200, err, c)
 		} else {
 			msg := map[string]interface{}{
 				"name": file.Filename,
 				"url":  "/assets/" + file.Filename,
 			}
 
-			utils.ReturnData(200, msg, c)
+			fmt.Println(msg)
+
+			// utils.ReturnData(200, msg, c)
 		}
 	} else {
-		utils.ReturnData(200, "token解析失败", c)
+		// utils.ReturnData(200, "token解析失败", c)
 	}
 }
 
@@ -66,9 +69,9 @@ func GetImgs(c *gin.Context) {
 	}
 
 	if err != nil {
-		utils.ReturnData(200, err, c)
+		// utils.ReturnData(200, err, c)
 	} else {
-		utils.ReturnData(200, imgs, c)
+		// utils.ReturnData(200, imgs, c)
 	}
 
 }

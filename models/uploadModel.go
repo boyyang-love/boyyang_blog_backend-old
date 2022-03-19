@@ -1,4 +1,4 @@
-/*
+/**
  * @Author: boyyang
  * @Date: 2022-02-19 10:48:12
  * @LastEditTime: 2022-02-19 11:40:31
@@ -13,9 +13,9 @@ import "github.com/jinzhu/gorm"
 
 type Upload struct {
 	gorm.Model
-	Url      string `json:"url"`
-	Name     string `json:"file_name"`
-	UploadID int    `json:"upload_id"`
+	Url      string `json:"url"`       //图片地址
+	Name     string `json:"file_name"` //图片名称
+	UploadID int    `json:"upload_id"` //用户id
 }
 
 func (Upload) TableName() string {

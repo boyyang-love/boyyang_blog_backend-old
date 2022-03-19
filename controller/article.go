@@ -1,4 +1,4 @@
-/*
+/**
  * @Author: boyyang
  * @Date: 2022-02-16 10:20:47
  * @LastEditTime: 2022-02-19 11:28:39
@@ -14,7 +14,6 @@ import (
 	"strconv"
 	"websit/models"
 	"websit/setupDatabase"
-	"websit/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,7 +22,8 @@ import (
 func GetArticles(c *gin.Context) {
 	var articles []models.Article
 	setupDatabase.DB.Preload("Author").Find(&articles)
-	utils.ReturnData(200, articles, c)
+	// utils.ReturnData(200, articles, c)
+	c.JSON(http.StatusOK, articles)
 }
 
 // 根据id查询
@@ -40,7 +40,8 @@ func GetArticleDetail(c *gin.Context) {
 
 	var article models.Article
 	setupDatabase.DB.Preload("Author").Where("id = ?", id).Find((&article))
-	utils.ReturnData(200, article, c)
+	// utils.ReturnData(200, article, c)
+	c.JSON(http.StatusOK, article)
 }
 
 // 添加文章
@@ -51,12 +52,12 @@ func AddArticle(c *gin.Context) {
 	author_id := c.PostForm("author")
 
 	if len(title) == 0 || len(author_id) == 0 {
-		utils.ReturnData(0, "标题以及作者id不能为空", c)
+		// utils.ReturnData(0, "标题以及作者id不能为空", c)
 	} else {
 		id, err := strconv.Atoi(author_id)
 
 		if err != nil {
-			utils.ReturnData(0, "错误", c)
+			// utils.ReturnData(0, "错误", c)
 		}
 
 		article := models.Article{
@@ -67,6 +68,7 @@ func AddArticle(c *gin.Context) {
 		}
 
 		res := setupDatabase.DB.Create(&article)
-		utils.ReturnData(200, res, c)
+		c.JSON(http.StatusOK, res)
+		// utils.ReturnData(200, res, c)
 	}
 }
