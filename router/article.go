@@ -16,11 +16,11 @@ import (
 )
 
 func AritcleRouterInit(r *gin.Engine) {
-	loginRouters := r.Group("api")
+	articleRouters := r.Group("api")
 	{
-		loginRouters.GET("articles", controller.GetArticles)
-		loginRouters.GET("articlesDetail", controller.GetArticleDetail)
-		loginRouters.POST("addArticle", controller.AddArticle)
-
+		articleRouters.GET("articles", controller.GetArticles)
+		articleRouters.GET("articlesDetail", controller.GetArticleDetail)
+		articleRouters.POST("addArticle", controller.AddArticle)
+		articleRouters.POST("delArticle", controller.DelArticle)
 	}
 }

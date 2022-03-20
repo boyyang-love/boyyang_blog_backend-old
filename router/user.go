@@ -10,26 +10,14 @@
 package routers
 
 import (
+	"websit/controller"
+
 	"github.com/gin-gonic/gin"
 )
 
 func UserRouterInit(r *gin.Engine) {
-	userRouters := r.Group("user")
+	userRouters := r.Group("api")
 	{
-		userRouters.GET("/", func(c *gin.Context) {
-
-			// userList := []models.User{}
-
-			// setupDatabase.DB.Find(&userList)
-
-			// c.JSON(200, gin.H{
-			// 	"data": userList,
-			// })
-
-		})
-
-		userRouters.GET("update", func(c *gin.Context) {
-			c.String(200, "update user")
-		})
+		userRouters.GET("updateUser", controller.UpdateUser)
 	}
 }

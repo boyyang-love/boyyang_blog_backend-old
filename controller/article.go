@@ -10,7 +10,6 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 	"websit/models"
@@ -28,7 +27,23 @@ func GetArticles(c *gin.Context) {
 	_limit, _ := strconv.ParseInt(limit, 10, 32)
 	var articles []models.Article
 	var count int
-	setupDatabase.DB.Limit(_limit).Offset((_page - 1) * _limit).Preload("Author").Find(&articles).Offset(-1).Limit(-1).Count(&count)
+	if _page == 0 && _limit == 0 {
+		setupDatabase.
+			DB.
+			Preload("Author").
+			Find(&articles).
+			Count(&count)
+	} else {
+		setupDatabase.
+			DB.
+			Limit(_limit).
+			Offset((_page - 1) * _limit).
+			Preload("Author").
+			Find(&articles).
+			Offset(-1).
+			Limit(-1).
+			Count(&count)
+	}
 	c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取成功", Count: count}, articles))
 }
 
@@ -66,8 +81,23 @@ func AddArticle(c *gin.Context) {
 			Content:  content,
 			UserID:   author_id,
 		}
-		res := setupDatabase.DB.Create(&article)
-		fmt.Println(res.Value)
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "文章添加成功"}, res.Value))
+		err := setupDatabase.DB.Create(&article).Error
+		if err == nil {
+			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "文章添加成功"}, article.ID))
+		} else {
+			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "文章添加失败"}, err))
+		}
+	}
+}
+
+// 删除文章
+func DelArticle(c *gin.Context) {
+	id := c.PostForm("id")
+	var articel models.Article
+	err := setupDatabase.DB.Where("id = ?", id).Delete(&articel).Error
+	if err == nil {
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "文章删除成功"}, nil))
+	} else {
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "文章删除失败"}, err))
 	}
 }

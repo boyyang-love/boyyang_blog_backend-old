@@ -13,9 +13,10 @@ import "github.com/jinzhu/gorm"
 
 type Upload struct {
 	gorm.Model
-	Url      string `json:"url"`       //图片地址
-	Name     string `json:"file_name"` //图片名称
-	UploadID int    `json:"upload_id"` //用户id
+	Url    string `json:"url"`       //图片地址
+	Name   string `json:"file_name"` //图片名称
+	UserID int    `json:"user_id"`   //用户id
+	Author User   `json:"author" gorm:"foreignKey:UserID"`
 }
 
 func (Upload) TableName() string {

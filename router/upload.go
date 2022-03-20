@@ -16,9 +16,9 @@ import (
 )
 
 func UploadRouterInit(r *gin.Engine) {
-	uploadRouters := r.Group("upload")
+	uploadRouters := r.Group("api")
 	{
-		uploadRouters.POST("/", controller.Upload)
-		uploadRouters.GET("/getImgs", controller.GetImgs)
+		uploadRouters.POST("upload", controller.Upload)
+		uploadRouters.GET("getImgs", controller.GetImgs)
 	}
 }
