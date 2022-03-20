@@ -19,7 +19,6 @@ func LoginRouterInit(r *gin.Engine) {
 	loginRouters := r.Group("api")
 	{
 		loginRouters.POST("login", controller.Login)
-
 		loginRouters.POST("register", controller.Register)
 	}
 }

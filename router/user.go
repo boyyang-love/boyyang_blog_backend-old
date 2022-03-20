@@ -18,6 +18,6 @@ import (
 func UserRouterInit(r *gin.Engine) {
 	userRouters := r.Group("api")
 	{
-		userRouters.GET("updateUser", controller.UpdateUser)
+		userRouters.POST("updateUser", controller.UpdateUser)
 	}
 }
