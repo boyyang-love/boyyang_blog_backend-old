@@ -21,8 +21,8 @@ var DB *gorm.DB
 //数据库连接
 func SetupDB() *gorm.DB {
 	driverName := "mysql"
-	host := "h-cynosdbmysql-grp-q87hvhhs.sql.tencentcdb.com" //127.0.0.1
-	port := "26019"                                          //3306
+	host := "sh-cynosdbmysql-grp-q87hvhhs.sql.tencentcdb.com" //127.0.0.1
+	port := "26019"                                           //3306
 	database := "boyyang"
 	username := "root"
 	password := "zxgf8bTa" // root
