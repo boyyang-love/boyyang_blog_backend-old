@@ -21,5 +21,5 @@ func main() {
 
 	r := setupRouter.SetupRouter()
 
-	r.Run(":8000")
+	r.Run(":80")
 }
