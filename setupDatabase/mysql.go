@@ -21,11 +21,11 @@ var DB *gorm.DB
 //数据库连接
 func SetupDB() *gorm.DB {
 	driverName := "mysql"
-	host := "127.0.0.1"
-	port := "3306"
+	host := "sh-cynosdbmysql-grp-gjz5my7o.sql.tencentcdb.com" //127.0.0.1
+	port := "24848"                                           //3306
 	database := "boyyang"
 	username := "root"
-	password := "root"
+	password := "zxgf8bTa" // root
 	charset := "utf8"
 	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true",
 		username,
