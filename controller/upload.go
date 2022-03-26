@@ -40,7 +40,7 @@ func Upload(c *gin.Context) {
 		} else {
 			msg := map[string]interface{}{
 				"name": file.Filename,
-				"url":  "/assets/" + file.Filename,
+				"url":  "/images/" + file.Filename,
 			}
 			fmt.Println(msg)
 			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "图片上传成功"}, msg))
