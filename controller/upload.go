@@ -10,7 +10,6 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 	"path"
 	"websit/models"
@@ -23,11 +22,8 @@ import (
 func Upload(c *gin.Context) {
 	token := c.Request.Header.Get("token")
 	file, _ := c.FormFile("file")
-	url := "7072-prod-2g489qm8208c3cfd-1301921121/images"
-	dst := path.Join(url, file.Filename)
-	c.SaveUploadedFile(file, dst)
+	dst := path.Join("./assets", file.Filename)
 	claims, err := utils.ParseToken(token)
-	fmt.Println(token)
 	if err == nil {
 		upload := models.Upload{
 			Url:    dst,
@@ -40,9 +36,8 @@ func Upload(c *gin.Context) {
 		} else {
 			msg := map[string]interface{}{
 				"name": file.Filename,
-				"url":  "/images/" + file.Filename,
+				"url":  "/assets/" + file.Filename,
 			}
-			fmt.Println(msg)
 			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "图片上传成功"}, msg))
 		}
 	} else {
