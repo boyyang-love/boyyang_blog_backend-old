@@ -23,7 +23,8 @@ import (
 func Upload(c *gin.Context) {
 	token := c.Request.Header.Get("token")
 	file, _ := c.FormFile("file")
-	dst := path.Join("./assets", file.Filename)
+	url := "7072-prod-2g489qm8208c3cfd-1301921121/images"
+	dst := path.Join(url, file.Filename)
 	c.SaveUploadedFile(file, dst)
 	claims, err := utils.ParseToken(token)
 	fmt.Println(token)
