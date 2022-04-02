@@ -1,16 +1,16 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:25:46
- * @LastEditTime: 2022-02-19 11:47:09
+ * @LastEditTime: 2022-04-03 00:17:50
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\src\router\upload.go
+ * @FilePath: \blog\router\upload.go
  */
 
 package routers
 
 import (
-	"websit/controller"
+	controller "websit/controller/upload"
 
 	"github.com/gin-gonic/gin"
 )

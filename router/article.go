@@ -1,16 +1,16 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 10:19:41
- * @LastEditTime: 2022-02-18 14:09:21
+ * @LastEditTime: 2022-04-03 00:17:16
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\src\router\article.go
+ * @FilePath: \blog\router\article.go
  */
 
 package routers
 
 import (
-	"websit/controller"
+	controller "websit/controller/article"
 
 	"github.com/gin-gonic/gin"
 )
@@ -22,5 +22,6 @@ func AritcleRouterInit(r *gin.Engine) {
 		articleRouters.GET("articlesDetail", controller.GetArticleDetail)
 		articleRouters.POST("addArticle", controller.AddArticle)
 		articleRouters.POST("delArticle", controller.DelArticle)
+		articleRouters.GET("thumbsUp", controller.ThumbsUp)
 	}
 }

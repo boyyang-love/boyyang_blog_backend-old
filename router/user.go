@@ -1,16 +1,16 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 20:33:06
- * @LastEditTime: 2022-02-15 11:25:49
+ * @LastEditTime: 2022-04-03 00:17:58
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\websit\router\user.go
+ * @FilePath: \blog\router\user.go
  */
 
 package routers
 
 import (
-	"websit/controller"
+	controller "websit/controller/user"
 
 	"github.com/gin-gonic/gin"
 )

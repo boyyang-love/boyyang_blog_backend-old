@@ -46,9 +46,9 @@ func SetupDB() *gorm.DB {
 		fmt.Println("<<<<mysql连接成功>>>>")
 	}
 
-	DB.AutoMigrate(&models.User{})
-	DB.AutoMigrate(&models.Article{})
-	DB.AutoMigrate(&models.Upload{})
+	DB.AutoMigrate(&models.User{}, &models.Article{}, &models.Upload{}, &models.PictureWall{})
+	// DB.AutoMigrate(&models.Article{})
+	// DB.AutoMigrate(&models.Upload{})
 
 	return DB
 }
