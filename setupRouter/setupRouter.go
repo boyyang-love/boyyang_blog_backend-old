@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 20:36:31
- * @LastEditTime: 2022-02-19 11:39:07
+ * @LastEditTime: 2022-04-03 09:33:45
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\src\setupRouter\setupRouter.go
+ * @FilePath: \blog\setupRouter\setupRouter.go
  */
 
 package setupRouter
@@ -27,9 +27,10 @@ func SetupRouter() *gin.Engine {
 	// 路由中间件
 	r.Use(middleware.TokenVerification())
 
-	routers.UserRouterInit(r)    //用户信息
-	routers.AritcleRouterInit(r) //文章博客
-	routers.UploadRouterInit(r)  //文件上传
+	routers.UserRouterInit(r)        //用户信息
+	routers.AritcleRouterInit(r)     //文章博客
+	routers.UploadRouterInit(r)      //文件上传
+	routers.PictureWallRouterInit(r) //图片墙
 
 	return r
 }

@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 15:14:21
- * @LastEditTime: 2022-02-16 15:26:32
+ * @LastEditTime: 2022-04-03 12:02:50
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\src\utils\returnData.go
+ * @FilePath: \blog\utils\returnData.go
  */
 
 package utils
@@ -17,7 +17,7 @@ type Code struct {
 type ReturnMsg struct {
 	Code  int         `json:"code"`
 	Msg   string      `json:"msg"`
-	Count int         `json:"count"`
+	Count int         `json:"count,omitempty"`
 	Data  interface{} `json:"data"`
 }
 
