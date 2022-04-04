@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-03 00:35:57
- * @LastEditTime: 2022-04-03 14:03:52
+ * @LastEditTime: 2022-04-04 12:02:07
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\pictureWall\pictureWall.go
@@ -62,6 +62,35 @@ func GetPicture(c *gin.Context) {
 	}
 	if err == nil {
 		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功", Count: count}, pictures))
+	} else {
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取失败"}, err))
+	}
+}
+
+// 删除图片
+func DeletePicture(c *gin.Context) {
+	id := c.Param("id")
+	var picture models.PictureWall
+	err := setupDatabase.DB.First(&picture, id).Error
+	if err == nil {
+		err = setupDatabase.DB.Delete(&picture).Error
+		if err == nil {
+			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "删除成功"}, picture))
+		} else {
+			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "删除失败"}, err))
+		}
+	} else {
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "删除失败"}, err))
+	}
+}
+
+// 获取图片详情
+func GetPictureDetail(c *gin.Context) {
+	id := c.Param("id")
+	var picture models.PictureWall
+	err := setupDatabase.DB.First(&picture, id).Error
+	if err == nil {
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功"}, picture))
 	} else {
 		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取失败"}, err))
 	}
