@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-18 14:33:00
- * @LastEditTime: 2022-02-18 16:44:30
+ * @LastEditTime: 2022-04-05 15:05:26
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\src\utils\generateToken.go
+ * @FilePath: \blog\utils\generateToken.go
  */
 
 package utils
@@ -27,7 +27,6 @@ func GenerateToken(username string, password string, id int) (string, error) {
 	fmt.Println(setting.JwtSecret, username, password, id)
 	// nowTime := time.Now()
 	// expireTime := nowTime.Add(5 * time.Hour)
-
 	claims := Claims{
 		Username: username,
 		Password: password,
