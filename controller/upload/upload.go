@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
- * @LastEditTime: 2022-04-05 13:40:00
+ * @LastEditTime: 2022-04-05 14:44:28
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\upload\upload.go
@@ -74,5 +74,16 @@ func GetImgs(c *gin.Context) {
 		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取失败"}, nil))
 	} else {
 		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功", Count: count}, imgs))
+	}
+}
+
+// 获取所有图片
+func GetAllImgs(c *gin.Context) {
+	imgs := []models.Upload{}
+	err := setupDatabase.DB.Preload("Author").Find(&imgs).Error
+	if err != nil {
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取失败"}, nil))
+	} else {
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功"}, imgs))
 	}
 }
