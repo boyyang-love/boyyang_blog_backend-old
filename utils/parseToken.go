@@ -1,16 +1,16 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-18 14:40:33
- * @LastEditTime: 2022-02-18 16:43:40
+ * @LastEditTime: 2022-04-05 15:37:18
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\src\utils\parseToken.go
+ * @FilePath: \blog\utils\parseToken.go
  */
 
 package utils
 
 import (
-	"websit/setting"
+	"blog/setting"
 
 	"github.com/dgrijalva/jwt-go"
 )

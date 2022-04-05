@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
- * @LastEditTime: 2022-04-05 14:44:28
+ * @LastEditTime: 2022-04-05 15:40:38
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\upload\upload.go
@@ -10,12 +10,12 @@
 package controller
 
 import (
+	"blog/client"
+	"blog/models"
+	"blog/setupDatabase"
+	"blog/utils"
 	"context"
 	"net/http"
-	"websit/client"
-	"websit/models"
-	"websit/setupDatabase"
-	"websit/utils"
 
 	"github.com/gin-gonic/gin"
 	"github.com/tencentyun/cos-go-sdk-v5"

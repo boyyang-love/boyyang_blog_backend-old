@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-03 09:04:46
- * @LastEditTime: 2022-04-03 13:40:20
+ * @LastEditTime: 2022-04-05 15:38:53
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\router\pictureWall.go
@@ -11,7 +11,7 @@
 package routers
 
 import (
-	controller "websit/controller/pictureWall"
+	controller "blog/controller/pictureWall"
 
 	"github.com/gin-gonic/gin"
 )

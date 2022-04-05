@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-18 14:33:00
- * @LastEditTime: 2022-04-05 15:05:26
+ * @LastEditTime: 2022-04-05 15:37:00
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\utils\generateToken.go
@@ -10,8 +10,8 @@
 package utils
 
 import (
+	"blog/setting"
 	"fmt"
-	"websit/setting"
 
 	"github.com/dgrijalva/jwt-go"
 )

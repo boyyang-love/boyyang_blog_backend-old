@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-03 00:35:57
- * @LastEditTime: 2022-04-04 12:02:07
+ * @LastEditTime: 2022-04-05 15:40:22
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\pictureWall\pictureWall.go
@@ -11,11 +11,11 @@
 package controller
 
 import (
+	"blog/models"
+	"blog/setupDatabase"
+	"blog/utils"
 	"net/http"
 	"strconv"
-	"websit/models"
-	"websit/setupDatabase"
-	"websit/utils"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 20:33:06
- * @LastEditTime: 2022-04-03 00:17:58
+ * @LastEditTime: 2022-04-05 15:39:10
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\router\user.go
@@ -10,7 +10,7 @@
 package routers
 
 import (
-	controller "websit/controller/user"
+	controller "blog/controller/user"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:25:46
- * @LastEditTime: 2022-04-05 14:45:12
+ * @LastEditTime: 2022-04-05 15:39:01
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\router\upload.go
@@ -10,7 +10,7 @@
 package routers
 
 import (
-	controller "websit/controller/upload"
+	controller "blog/controller/upload"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 20:36:31
- * @LastEditTime: 2022-04-04 23:44:05
+ * @LastEditTime: 2022-04-05 15:37:58
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupRouter\setupRouter.go
@@ -10,9 +10,9 @@
 package setupRouter
 
 import (
+	"blog/middleware"
+	routers "blog/router"
 	"net/http"
-	"websit/middleware"
-	routers "websit/router"
 
 	"github.com/gin-gonic/gin"
 )

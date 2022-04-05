@@ -1,17 +1,17 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 19:45:12
- * @LastEditTime: 2022-02-14 10:51:43
+ * @LastEditTime: 2022-04-05 15:36:31
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\websit\main.go
+ * @FilePath: \blog\main.go
  */
 
 package main
 
 import (
-	setupDatabase "websit/setupDatabase"
-	setupRouter "websit/setupRouter"
+	setupDatabase "blog/setupDatabase"
+	setupRouter "blog/setupRouter"
 )
 
 func main() {

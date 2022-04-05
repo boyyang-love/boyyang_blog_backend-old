@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 10:20:47
- * @LastEditTime: 2022-04-05 13:39:19
+ * @LastEditTime: 2022-04-05 15:39:55
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\article\article.go
@@ -11,11 +11,11 @@
 package controller
 
 import (
+	"blog/models"
+	"blog/setupDatabase"
+	"blog/utils"
 	"net/http"
 	"strconv"
-	"websit/models"
-	"websit/setupDatabase"
-	"websit/utils"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"

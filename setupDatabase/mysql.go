@@ -1,16 +1,16 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 10:43:46
- * @LastEditTime: 2022-02-19 10:56:21
+ * @LastEditTime: 2022-04-05 15:38:15
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\src\setupDatabase\mysql.go
+ * @FilePath: \blog\setupDatabase\mysql.go
  */
 package setupDatabase
 
 import (
+	"blog/models"
 	"fmt"
-	"websit/models"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"

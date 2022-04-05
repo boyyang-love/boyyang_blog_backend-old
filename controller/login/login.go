@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:43
- * @LastEditTime: 2022-04-05 13:38:39
+ * @LastEditTime: 2022-04-05 15:40:09
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\login\login.go
@@ -10,10 +10,10 @@
 package controller
 
 import (
+	"blog/models"
+	"blog/setupDatabase"
+	"blog/utils"
 	"net/http"
-	"websit/models"
-	"websit/setupDatabase"
-	"websit/utils"
 
 	"github.com/gin-gonic/gin"
 )
