@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
- * @LastEditTime: 2022-02-19 11:59:10
+ * @LastEditTime: 2022-04-05 13:40:00
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\src\controller\upload.go
+ * @FilePath: \blog\controller\upload\upload.go
  */
 
 package controller
@@ -71,7 +71,7 @@ func GetImgs(c *gin.Context) {
 		err = setupDatabase.DB.Preload("Author").Find(&imgs).Count(&count).Error
 	}
 	if err != nil {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取失败"}, nil))
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取失败"}, nil))
 	} else {
 		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功", Count: count}, imgs))
 	}

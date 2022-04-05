@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:43
- * @LastEditTime: 2022-02-18 22:46:27
+ * @LastEditTime: 2022-04-05 13:38:39
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\src\controller\login.go
+ * @FilePath: \blog\controller\login\login.go
  */
 
 package controller
@@ -61,12 +61,12 @@ func Register(c *gin.Context) {
 			if err == nil {
 				c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "用户注册成功"}, nil))
 			} else {
-				c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "数据库写入失败"}, nil))
+				c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "数据库写入失败"}, nil))
 			}
 		} else {
-			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "该用户名已经注册"}, nil))
+			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "该用户名已经注册"}, nil))
 		}
 	} else {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "用户名和密码为必填项"}, nil))
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "用户名和密码为必填项"}, nil))
 	}
 }

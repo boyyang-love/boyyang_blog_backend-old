@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 10:20:47
- * @LastEditTime: 2022-04-03 13:23:54
+ * @LastEditTime: 2022-04-05 13:39:19
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\article\article.go
@@ -46,7 +46,7 @@ func GetArticles(c *gin.Context) {
 			Limit(-1).
 			Count(&count)
 	}
-	c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取成功", Count: count}, articles))
+	c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功", Count: count}, articles))
 }
 
 // 根据id查询
@@ -58,7 +58,7 @@ func GetArticleDetail(c *gin.Context) {
 	}
 	var article models.Article
 	setupDatabase.DB.Preload("Author").Where("id = ?", id).Find((&article))
-	c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取成功"}, article))
+	c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功"}, article))
 }
 
 // 添加文章
@@ -87,7 +87,7 @@ func AddArticle(c *gin.Context) {
 		if err == nil {
 			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "文章添加成功"}, article.ID))
 		} else {
-			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "文章添加失败"}, err))
+			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "文章添加失败"}, err))
 		}
 	}
 }
@@ -100,7 +100,7 @@ func DelArticle(c *gin.Context) {
 	if err == nil {
 		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "文章删除成功"}, nil))
 	} else {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "文章删除失败"}, err))
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "文章删除失败"}, err))
 	}
 }
 

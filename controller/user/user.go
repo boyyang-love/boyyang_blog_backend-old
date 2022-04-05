@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:53
- * @LastEditTime: 2022-02-14 17:12:56
+ * @LastEditTime: 2022-04-05 13:40:09
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\websit\controller\userC.go
+ * @FilePath: \blog\controller\user\user.go
  */
 package controller
 
@@ -57,6 +57,6 @@ func UpdateUser(c *gin.Context) {
 	if err == nil {
 		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "用户信息更新成功"}, nil))
 	} else {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "用户信息更新失败"}, err))
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "用户信息更新失败"}, err))
 	}
 }
