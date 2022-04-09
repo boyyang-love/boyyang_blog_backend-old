@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
- * @LastEditTime: 2022-04-05 15:40:38
+ * @LastEditTime: 2022-04-09 20:10:42
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\upload\upload.go
@@ -16,6 +16,7 @@ import (
 	"blog/utils"
 	"context"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/tencentyun/cos-go-sdk-v5"
@@ -79,11 +80,33 @@ func GetImgs(c *gin.Context) {
 
 // 获取所有图片
 func GetAllImgs(c *gin.Context) {
+	page, _ := strconv.Atoi(c.Query("page"))
+	limit, _ := strconv.Atoi(c.Query("limit"))
 	imgs := []models.Upload{}
-	err := setupDatabase.DB.Preload("Author").Find(&imgs).Error
+	var count int
+	var err error
+	if page == 0 && limit == 0 {
+		err = setupDatabase.
+			DB.
+			Preload("Author").
+			Find(&imgs).
+			Count(&count).
+			Error
+	} else {
+		err = setupDatabase.
+			DB.
+			Limit(limit).
+			Offset((page - 1) * limit).
+			Preload("Author").
+			Find(&imgs).
+			Limit(-1).
+			Offset(-1).
+			Count(&count).
+			Error
+	}
 	if err != nil {
 		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取失败"}, nil))
 	} else {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功"}, imgs))
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功", Count: count}, imgs))
 	}
 }
