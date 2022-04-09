@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-03-27 10:36:33
- * @LastEditTime: 2022-04-09 23:28:55
+ * @LastEditTime: 2022-04-09 23:37:57
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\client\client.go
@@ -11,7 +11,6 @@
 package client
 
 import (
-	"context"
 	"net/http"
 	"net/url"
 
@@ -33,20 +32,20 @@ func SetupClient() *cos.Client {
 			SecretKey: "kDPLzNUKtBk23nGRM0MREkzxd3C4f03p",
 		},
 	})
-	opt := &cos.BucketPutCORSOptions{
-		Rules: []cos.BucketCORSRule{
-			{
-				AllowedOrigins: []string{"*"},
-				AllowedMethods: []string{"POST", "GET", "OPTIONS", "PUT", "DELETE", "UPDATE"},
-				AllowedHeaders: []string{"Authorization", "Content-Length", "X-CSRF-Token", "Token", "session"},
-				MaxAgeSeconds:  172800,
-				ExposeHeaders:  []string{"Content-Length", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers"},
-			},
-		},
-	}
-	_, err := Client.Bucket.PutCORS(context.Background(), opt)
-	if err != nil {
-		panic(err)
-	}
+	// opt := &cos.BucketPutCORSOptions{
+	// 	Rules: []cos.BucketCORSRule{
+	// 		{
+	// 			AllowedOrigins: []string{"*"},
+	// 			AllowedMethods: []string{"POST", "GET", "OPTIONS", "PUT", "DELETE", "UPDATE"},
+	// 			AllowedHeaders: []string{"Authorization", "Content-Length", "X-CSRF-Token", "Token", "session"},
+	// 			MaxAgeSeconds:  172800,
+	// 			ExposeHeaders:  []string{"Content-Length", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers"},
+	// 		},
+	// 	},
+	// }
+	// _, err := Client.Bucket.PutCORS(context.Background(), opt)
+	// if err != nil {
+	// 	panic(err)
+	// }
 	return Client
 }
