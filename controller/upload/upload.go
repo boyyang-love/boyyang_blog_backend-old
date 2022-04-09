@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
- * @LastEditTime: 2022-04-09 20:10:42
+ * @LastEditTime: 2022-04-09 22:07:26
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\upload\upload.go
@@ -88,6 +88,7 @@ func GetAllImgs(c *gin.Context) {
 	if page == 0 && limit == 0 {
 		err = setupDatabase.
 			DB.
+			Order("id desc").
 			Preload("Author").
 			Find(&imgs).
 			Count(&count).
@@ -95,6 +96,7 @@ func GetAllImgs(c *gin.Context) {
 	} else {
 		err = setupDatabase.
 			DB.
+			Order("id desc").
 			Limit(limit).
 			Offset((page - 1) * limit).
 			Preload("Author").
