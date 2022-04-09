@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-03-27 10:36:33
- * @LastEditTime: 2022-04-09 23:20:48
+ * @LastEditTime: 2022-04-09 23:28:55
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\client\client.go
@@ -36,7 +36,7 @@ func SetupClient() *cos.Client {
 	opt := &cos.BucketPutCORSOptions{
 		Rules: []cos.BucketCORSRule{
 			{
-				AllowedOrigins: []string{"http://boyyang.3vkj.net"},
+				AllowedOrigins: []string{"*"},
 				AllowedMethods: []string{"POST", "GET", "OPTIONS", "PUT", "DELETE", "UPDATE"},
 				AllowedHeaders: []string{"Authorization", "Content-Length", "X-CSRF-Token", "Token", "session"},
 				MaxAgeSeconds:  172800,
