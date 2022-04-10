@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:53
- * @LastEditTime: 2022-04-05 15:40:52
+ * @LastEditTime: 2022-04-10 21:49:51
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\user\user.go
@@ -20,7 +20,7 @@ import (
 
 func UpdateUser(c *gin.Context) {
 	token := c.Request.Header.Get("token")
-	name := c.PostForm("name")
+	name := c.PostForm("username")
 	avaterUrl := c.PostForm("avaterUrl")
 	age, _ := strconv.Atoi(c.PostForm("age"))
 	sex, _ := strconv.Atoi(c.PostForm("sex"))
