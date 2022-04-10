@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
- * @LastEditTime: 2022-04-09 22:07:26
+ * @LastEditTime: 2022-04-10 10:25:40
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\upload\upload.go
@@ -31,6 +31,7 @@ func Upload(c *gin.Context) {
 			ContentType: "image/jpeg",
 		},
 	}
+
 	f, _ := file.Open()
 	_, err := client.Object.Put(context.Background(), "/images/"+file.Filename, f, opt)
 	if err != nil {
