@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-18 14:33:00
- * @LastEditTime: 2022-04-05 15:37:00
+ * @LastEditTime: 2022-04-28 11:23:59
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\utils\generateToken.go
@@ -36,13 +36,10 @@ func GenerateToken(username string, password string, id int) (string, error) {
 			Issuer: "YZH",
 		},
 	}
-
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	fmt.Println("tokenClaims", tokenClaims)
 	//该方法内部生成签名字符串，再用于获取完整、已签名的token
 	token, err := tokenClaims.SignedString(setting.JwtSecret)
-
 	fmt.Println(token)
-
 	return token, err
 }

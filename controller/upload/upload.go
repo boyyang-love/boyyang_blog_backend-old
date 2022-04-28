@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
- * @LastEditTime: 2022-04-23 16:52:26
+ * @LastEditTime: 2022-04-28 12:50:59
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\upload\upload.go
@@ -10,11 +10,12 @@
 package controller
 
 import (
-	"blog/client"
 	"blog/models"
+	client "blog/setupClient"
 	"blog/setupDatabase"
 	"blog/utils"
 	"context"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -31,31 +32,32 @@ func Upload(c *gin.Context) {
 			ContentType: "image/jpeg",
 		},
 	}
-
-	f, _ := file.Open()
-	_, err := client.Object.Put(context.Background(), "/images/"+file.Filename, f, opt)
-	if err != nil {
-		panic(err)
-	}
 	claims, err := utils.ParseToken(token)
 	if err == nil {
+		path := fmt.Sprintf("/%d/%s/%s", claims.Id, "images", file.Filename)
+		f, _ := file.Open()
+		var err error
+		_, err = client.Object.Put(context.Background(), path, f, opt)
+		if err != nil {
+			panic(err)
+		}
 		upload := models.Upload{
-			Url:      "/images/" + file.Filename,
+			Url:      path,
 			FileName: file.Filename,
 			UserID:   claims.Id,
 		}
-		err := setupDatabase.DB.Create(&upload).Error
+		err = setupDatabase.DB.Create(&upload).Error
 		if err != nil {
-			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "图片上传失败"}, err))
+			c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "图片上传失败"}, err))
 		} else {
 			msg := map[string]interface{}{
-				"name": file.Filename,
-				"url":  "/images/" + file.Filename,
+				"fileName": file.Filename,
+				"url":      path,
 			}
 			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "图片上传成功"}, msg))
 		}
 	} else {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "token验证失败"}, nil))
+		c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "token验证失败"}, nil))
 	}
 }
 
