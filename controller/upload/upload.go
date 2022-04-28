@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
- * @LastEditTime: 2022-04-10 10:25:40
+ * @LastEditTime: 2022-04-23 16:52:26
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\upload\upload.go
@@ -40,9 +40,9 @@ func Upload(c *gin.Context) {
 	claims, err := utils.ParseToken(token)
 	if err == nil {
 		upload := models.Upload{
-			Url:    "/images/" + file.Filename,
-			Name:   file.Filename,
-			UserID: claims.Id,
+			Url:      "/images/" + file.Filename,
+			FileName: file.Filename,
+			UserID:   claims.Id,
 		}
 		err := setupDatabase.DB.Create(&upload).Error
 		if err != nil {

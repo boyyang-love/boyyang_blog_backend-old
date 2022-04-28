@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 10:43:46
- * @LastEditTime: 2022-04-05 15:38:15
+ * @LastEditTime: 2022-04-23 17:18:09
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupDatabase\mysql.go
@@ -46,7 +46,13 @@ func SetupDB() *gorm.DB {
 		fmt.Println("<<<<mysql连接成功>>>>")
 	}
 
-	DB.AutoMigrate(&models.User{}, &models.Article{}, &models.Upload{}, &models.PictureWall{})
+	DB.AutoMigrate(
+		&models.User{},
+		&models.Article{},
+		&models.Upload{},
+		&models.PictureWall{},
+		&models.ImagesTag{},
+	)
 	// DB.AutoMigrate(&models.Article{})
 	// DB.AutoMigrate(&models.Upload{})
 

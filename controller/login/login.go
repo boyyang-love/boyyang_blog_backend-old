@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:43
- * @LastEditTime: 2022-04-05 15:40:09
+ * @LastEditTime: 2022-04-17 16:54:27
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\login\login.go
@@ -34,7 +34,7 @@ func Login(c *gin.Context) {
 				}
 				c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "登录成功"}, userMes))
 			} else {
-				c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "密码错误"}, nil))
+				c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "密码错误"}, nil))
 			}
 		} else {
 			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "不存在该用户"}, nil))
