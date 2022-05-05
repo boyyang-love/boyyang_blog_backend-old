@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 20:36:31
- * @LastEditTime: 2022-04-05 15:37:58
+ * @LastEditTime: 2022-04-29 17:43:29
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\setupRouter\setupRouter.go
+ * @FilePath: \blog\setupRouter\router.go
  */
 
 package setupRouter
@@ -32,6 +32,7 @@ func SetupRouter() *gin.Engine {
 	routers.AritcleRouterInit(r)     //文章博客
 	routers.UploadRouterInit(r)      //文件上传
 	routers.PictureWallRouterInit(r) //图片墙
+	routers.TagsRouterInit(r)        //标签
 
 	return r
 }

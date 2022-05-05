@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-03 00:35:57
- * @LastEditTime: 2022-04-28 11:12:25
+ * @LastEditTime: 2022-04-30 10:23:18
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\pictureWall\pictureWall.go
@@ -14,23 +14,46 @@ import (
 	"blog/models"
 	"blog/setupDatabase"
 	"blog/utils"
+	"fmt"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
-// 上传图片
+// 上传图片信息
 func UploadPicture(c *gin.Context) {
 	token := c.Request.Header.Get("token")
 	claims, _ := utils.ParseToken(token)
 	var form models.PictureWall
 	c.Bind(&form)
-	id := claims.Id
-	form.UserID = id
-	err := setupDatabase.DB.Create(&form).Error
+	form.UserID = claims.Id
+	res := setupDatabase.DB.Create(&form)
+	if res.Error == nil {
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "上传成功"}, map[string]interface{}{"id": form.ID}))
+	} else {
+		c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "上传失败"}, res.Error))
+	}
+}
+
+// 更新图片信息
+func UpdatePicture(c *gin.Context) {
+	var form models.PictureWall
+	var picture models.PictureWall
+	c.Bind(&form)
+	fmt.Println(form)
+	form.Tags = []models.ImagesTag{{TagName: "手机壁纸"}}
+	err := setupDatabase.
+		DB.
+		Debug().
+		Omit("Author").
+		Model(&picture).
+		Update(&form).
+		Error
 	if err == nil {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "上传成功"}, form))
+		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "更新成功"}, nil))
+	} else {
+		c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "更新失败"}, err))
 	}
 }
 
@@ -38,6 +61,10 @@ func UploadPicture(c *gin.Context) {
 func GetPicture(c *gin.Context) {
 	page, _ := strconv.Atoi(c.Query("page"))
 	limit, _ := strconv.Atoi(c.Query("limit"))
+	imagesTypes, _ := strconv.Atoi(c.Query("type"))
+	imagesHidden, _ := strconv.Atoi(c.Query("hidden"))
+	imagesStatus, _ := strconv.Atoi(c.Query("status"))
+
 	var pictures []models.PictureWall
 	var count int
 	var err error
@@ -45,6 +72,7 @@ func GetPicture(c *gin.Context) {
 		err = setupDatabase.
 			DB.
 			Preload("Author").
+			Where("type = ? and hidden = ? and status = ?", imagesTypes, imagesHidden, imagesStatus).
 			Find(&pictures).
 			Count(&count).
 			Error
@@ -52,8 +80,9 @@ func GetPicture(c *gin.Context) {
 		err = setupDatabase.
 			DB.
 			Limit(limit).
-			Offset((page - 1) * limit).
+			Offset((page-1)*limit).
 			Preload("Author").
+			Where("type = ? and hidden = ? and status = ?", imagesTypes, imagesHidden, imagesStatus).
 			Find(&pictures).
 			Limit(-1).
 			Offset(-1).

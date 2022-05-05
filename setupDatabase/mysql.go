@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 10:43:46
- * @LastEditTime: 2022-04-23 17:18:09
+ * @LastEditTime: 2022-04-29 09:51:10
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupDatabase\mysql.go
@@ -35,9 +35,7 @@ func SetupDB() *gorm.DB {
 		database,
 		charset,
 	)
-
 	var err error
-
 	DB, err = gorm.Open(driverName, args)
 	//db, err := gorm.Open("mysql", "user:islot@/blog?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
@@ -45,7 +43,6 @@ func SetupDB() *gorm.DB {
 	} else {
 		fmt.Println("<<<<mysql连接成功>>>>")
 	}
-
 	DB.AutoMigrate(
 		&models.User{},
 		&models.Article{},
@@ -55,6 +52,5 @@ func SetupDB() *gorm.DB {
 	)
 	// DB.AutoMigrate(&models.Article{})
 	// DB.AutoMigrate(&models.Upload{})
-
 	return DB
 }
