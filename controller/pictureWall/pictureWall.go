@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-03 00:35:57
- * @LastEditTime: 2022-04-30 10:23:18
+ * @LastEditTime: 2022-05-08 20:00:12
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\pictureWall\pictureWall.go
@@ -71,6 +71,7 @@ func GetPicture(c *gin.Context) {
 	if page == 0 && limit == 0 {
 		err = setupDatabase.
 			DB.
+			Order("id desc").
 			Preload("Author").
 			Where("type = ? and hidden = ? and status = ?", imagesTypes, imagesHidden, imagesStatus).
 			Find(&pictures).
@@ -79,6 +80,7 @@ func GetPicture(c *gin.Context) {
 	} else {
 		err = setupDatabase.
 			DB.
+			Order("id desc").
 			Limit(limit).
 			Offset((page-1)*limit).
 			Preload("Author").
