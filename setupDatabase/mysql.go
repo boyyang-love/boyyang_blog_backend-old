@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 10:43:46
- * @LastEditTime: 2022-04-29 09:51:10
+ * @LastEditTime: 2022-05-21 15:10:53
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupDatabase\mysql.go
@@ -41,6 +41,7 @@ func SetupDB() *gorm.DB {
 	if err != nil {
 		panic("failed to connect database,err:" + err.Error())
 	} else {
+		fmt.Println(args)
 		fmt.Println("<<<<mysql连接成功>>>>")
 	}
 	DB.AutoMigrate(

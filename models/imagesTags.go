@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-23 17:00:17
- * @LastEditTime: 2022-04-30 15:53:09
+ * @LastEditTime: 2022-05-21 20:44:30
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\models\imagesTags.go
@@ -14,7 +14,8 @@ import "github.com/jinzhu/gorm"
 
 type ImagesTag struct {
 	gorm.Model
-	TagName string `json:"tag_name"` //标签名称
+	TagName       string `json:"tag_name"` //标签名称
+	PictureWallID int    `json:"picturewall_id"`
 }
 
 func (ImagesTag) TableName() string {

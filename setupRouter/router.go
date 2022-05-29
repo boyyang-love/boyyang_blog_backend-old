@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 20:36:31
- * @LastEditTime: 2022-04-29 17:43:29
+ * @LastEditTime: 2022-05-29 20:08:46
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupRouter\router.go
@@ -25,7 +25,7 @@ func SetupRouter() *gin.Engine {
 	routers.LoginRouterInit(r) //登录注册
 	r.StaticFS("/assets", http.Dir("./assets"))
 
-	// 路由中间件
+	// 路由中间件 token验证
 	r.Use(middleware.TokenVerification())
 
 	routers.UserRouterInit(r)        //用户信息

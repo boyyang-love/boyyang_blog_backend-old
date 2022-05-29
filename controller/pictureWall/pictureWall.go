@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-03 00:35:57
- * @LastEditTime: 2022-05-08 20:00:12
+ * @LastEditTime: 2022-05-21 20:52:02
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\pictureWall\pictureWall.go
@@ -14,7 +14,6 @@ import (
 	"blog/models"
 	"blog/setupDatabase"
 	"blog/utils"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -41,8 +40,6 @@ func UpdatePicture(c *gin.Context) {
 	var form models.PictureWall
 	var picture models.PictureWall
 	c.Bind(&form)
-	fmt.Println(form)
-	form.Tags = []models.ImagesTag{{TagName: "手机壁纸"}}
 	err := setupDatabase.
 		DB.
 		Debug().
@@ -73,6 +70,7 @@ func GetPicture(c *gin.Context) {
 			DB.
 			Order("id desc").
 			Preload("Author").
+			Preload("Tags").
 			Where("type = ? and hidden = ? and status = ?", imagesTypes, imagesHidden, imagesStatus).
 			Find(&pictures).
 			Count(&count).
@@ -84,6 +82,7 @@ func GetPicture(c *gin.Context) {
 			Limit(limit).
 			Offset((page-1)*limit).
 			Preload("Author").
+			Preload("Tags").
 			Where("type = ? and hidden = ? and status = ?", imagesTypes, imagesHidden, imagesStatus).
 			Find(&pictures).
 			Limit(-1).
