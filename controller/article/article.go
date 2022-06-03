@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 10:20:47
- * @LastEditTime: 2022-04-05 15:39:55
+ * @LastEditTime: 2022-06-02 19:23:16
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\article\article.go
@@ -46,19 +46,32 @@ func GetArticles(c *gin.Context) {
 			Limit(-1).
 			Count(&count)
 	}
-	c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功", Count: count}, articles))
+	c.JSON(
+		http.StatusOK,
+		utils.Msg(utils.Message{Code: 1, Msg: "获取成功", Data: articles, Count: count}),
+	)
 }
 
 // 根据id查询
 func GetArticleDetail(c *gin.Context) {
 	id := c.Query("id")
 	if id == "" {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "id为必填项"}, nil))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 0, Msg: "文章id不能为空"}),
+		)
 		return
 	}
 	var article models.Article
-	setupDatabase.DB.Preload("Author").Where("id = ?", id).Find((&article))
-	c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功"}, article))
+	setupDatabase.
+		DB.
+		Preload("Author").
+		Where("id = ?", id).
+		Find((&article))
+	c.JSON(
+		http.StatusOK,
+		utils.Msg(utils.Message{Code: 1, Msg: "获取成功", Data: article}),
+	)
 }
 
 // 添加文章
@@ -74,7 +87,10 @@ func AddArticle(c *gin.Context) {
 		author_id = userInfo.Id
 	}
 	if len(title) == 0 {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "文章标题不能为空"}, nil))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 0, Msg: "文章标题不能为空"}),
+		)
 	} else {
 		article := models.Article{
 			Title:    title,
@@ -83,11 +99,20 @@ func AddArticle(c *gin.Context) {
 			Content:  content,
 			UserID:   author_id,
 		}
-		err := setupDatabase.DB.Create(&article).Error
+		err := setupDatabase.
+			DB.
+			Create(&article).
+			Error
 		if err == nil {
-			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "文章添加成功"}, article.ID))
+			c.JSON(
+				http.StatusOK,
+				utils.Msg(utils.Message{Code: 1, Msg: "文章添加成功", Data: article.ID}),
+			)
 		} else {
-			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "文章添加失败"}, err))
+			c.JSON(
+				http.StatusOK,
+				utils.Msg(utils.Message{Code: 0, Msg: "文章添加失败"}),
+			)
 		}
 	}
 }
@@ -96,18 +121,26 @@ func AddArticle(c *gin.Context) {
 func DelArticle(c *gin.Context) {
 	id := c.PostForm("id")
 	var articel models.Article
-	err := setupDatabase.DB.Where("id = ?", id).Delete(&articel).Error
+	err := setupDatabase.
+		DB.Where("id = ?", id).
+		Delete(&articel).
+		Error
 	if err == nil {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "文章删除成功"}, nil))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 1, Msg: "删除成功"}),
+		)
 	} else {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "文章删除失败"}, err))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 0, Msg: "删除失败", Error: err}),
+		)
 	}
 }
 
 // 文章点赞
 func ThumbsUp(c *gin.Context) {
 	id := c.Query("id")
-
 	err := setupDatabase.
 		DB.
 		Model(&models.Article{}).
@@ -115,6 +148,9 @@ func ThumbsUp(c *gin.Context) {
 		Update("thumbs_up", gorm.Expr("thumbs_up + 1")).
 		Error
 	if err == nil {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "点赞成功"}, nil))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 1, Msg: "点赞成功"}),
+		)
 	}
 }

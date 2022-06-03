@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 15:14:21
- * @LastEditTime: 2022-04-03 12:02:50
+ * @LastEditTime: 2022-06-03 10:57:15
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\utils\returnData.go
@@ -9,23 +9,29 @@
 
 package utils
 
-type Code struct {
-	Code  int
-	Msg   string
-	Count int
-}
-type ReturnMsg struct {
+type Message struct {
 	Code  int         `json:"code"`
 	Msg   string      `json:"msg"`
+	Error error       `json:"error,omitempty"`
 	Count int         `json:"count,omitempty"`
-	Data  interface{} `json:"data"`
+	Data  interface{} `json:"data,omitempty"`
 }
 
-func RetunMsgFunc(code Code, data interface{}) *ReturnMsg {
-	rm := new(ReturnMsg)
-	rm.Code = code.Code
-	rm.Count = code.Count
-	rm.Msg = code.Msg
-	rm.Data = data
-	return rm
+func Msg(msg Message) *Message {
+	if msg.Data == nil {
+		return &Message{
+			Code:  msg.Code,
+			Msg:   msg.Msg,
+			Error: msg.Error,
+			Count: msg.Count,
+		}
+	} else {
+		return &Message{
+			Code:  msg.Code,
+			Msg:   msg.Msg,
+			Error: msg.Error,
+			Data:  msg.Data,
+			Count: msg.Count,
+		}
+	}
 }

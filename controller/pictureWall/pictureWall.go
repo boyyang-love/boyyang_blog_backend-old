@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-03 00:35:57
- * @LastEditTime: 2022-05-21 20:52:02
+ * @LastEditTime: 2022-06-03 10:52:16
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\pictureWall\pictureWall.go
@@ -27,11 +27,19 @@ func UploadPicture(c *gin.Context) {
 	var form models.PictureWall
 	c.Bind(&form)
 	form.UserID = claims.Id
-	res := setupDatabase.DB.Create(&form)
+	res := setupDatabase.
+		DB.
+		Create(&form)
 	if res.Error == nil {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "上传成功"}, map[string]interface{}{"id": form.ID}))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 1, Msg: "上传成功", Data: form.ID}),
+		)
 	} else {
-		c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "上传失败"}, res.Error))
+		c.JSON(
+			http.StatusBadRequest,
+			utils.Msg(utils.Message{Code: 0, Msg: "上传失败", Data: res.Error}),
+		)
 	}
 }
 
@@ -48,9 +56,15 @@ func UpdatePicture(c *gin.Context) {
 		Update(&form).
 		Error
 	if err == nil {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "更新成功"}, nil))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 1, Msg: "更新成功", Data: picture}),
+		)
 	} else {
-		c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "更新失败"}, err))
+		c.JSON(
+			http.StatusBadRequest,
+			utils.Message{Code: 0, Msg: "更新失败", Error: err},
+		)
 	}
 }
 
@@ -91,9 +105,15 @@ func GetPicture(c *gin.Context) {
 			Error
 	}
 	if err == nil {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功", Count: count}, pictures))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 1, Msg: "获取成功", Data: pictures, Count: count}),
+		)
 	} else {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取失败"}, err))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 0, Msg: "获取失败", Error: err}),
+		)
 	}
 }
 
@@ -105,12 +125,21 @@ func DeletePicture(c *gin.Context) {
 	if err == nil {
 		err = setupDatabase.DB.Delete(&picture).Error
 		if err == nil {
-			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "删除成功"}, picture))
+			c.JSON(
+				http.StatusOK,
+				utils.Msg(utils.Message{Code: 1, Msg: "删除成功"}),
+			)
 		} else {
-			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "删除失败"}, err))
+			c.JSON(
+				http.StatusOK,
+				utils.Msg(utils.Message{Code: 0, Msg: "删除失败", Error: err}),
+			)
 		}
 	} else {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "删除失败"}, err))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 0, Msg: "删除失败", Error: err}),
+		)
 	}
 }
 
@@ -118,10 +147,19 @@ func DeletePicture(c *gin.Context) {
 func GetPictureDetail(c *gin.Context) {
 	id := c.Param("id")
 	var picture models.PictureWall
-	err := setupDatabase.DB.First(&picture, id).Error
+	err := setupDatabase.
+		DB.
+		First(&picture, id).
+		Error
 	if err == nil {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功"}, picture))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 1, Msg: "获取成功", Data: picture}),
+		)
 	} else {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取失败"}, err))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 0, Msg: "获取失败", Error: err}),
+		)
 	}
 }

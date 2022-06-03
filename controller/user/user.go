@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:53
- * @LastEditTime: 2022-04-23 17:57:39
+ * @LastEditTime: 2022-06-03 11:01:23
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\user\user.go
@@ -29,7 +29,10 @@ func UpdateUser(c *gin.Context) {
 		First(&user)
 	// 如果用户存
 	if data.RowsAffected > 0 {
-		c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "该用户名已经存在"}, nil))
+		c.JSON(
+			http.StatusBadRequest,
+			utils.Msg(utils.Message{Code: 0, Msg: "用户名已存在"}),
+		)
 		return
 	}
 	err := setupDatabase.
@@ -39,8 +42,14 @@ func UpdateUser(c *gin.Context) {
 		Update(&form).
 		Error
 	if err == nil {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "用户信息更新成功"}, nil))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 1, Msg: "更新成功", Data: form.ID}),
+		)
 	} else {
-		c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "用户信息更新失败"}, err))
+		c.JSON(
+			http.StatusBadRequest,
+			utils.Msg(utils.Message{Code: 0, Msg: "更新失败", Data: err}),
+		)
 	}
 }

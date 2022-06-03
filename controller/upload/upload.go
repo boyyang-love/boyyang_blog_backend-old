@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
- * @LastEditTime: 2022-04-28 12:50:59
+ * @LastEditTime: 2022-06-03 10:59:24
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\upload\upload.go
@@ -46,18 +46,30 @@ func Upload(c *gin.Context) {
 			FileName: file.Filename,
 			UserID:   claims.Id,
 		}
-		err = setupDatabase.DB.Create(&upload).Error
+		err = setupDatabase.
+			DB.
+			Create(&upload).
+			Error
 		if err != nil {
-			c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "图片上传失败"}, err))
+			c.JSON(
+				http.StatusBadRequest,
+				utils.Msg(utils.Message{Code: 0, Msg: "上传失败", Error: err}),
+			)
 		} else {
 			msg := map[string]interface{}{
 				"fileName": file.Filename,
 				"url":      path,
 			}
-			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "图片上传成功"}, msg))
+			c.JSON(
+				http.StatusOK,
+				utils.Msg(utils.Message{Code: 1, Msg: "上传成功", Data: msg}),
+			)
 		}
 	} else {
-		c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "token验证失败"}, nil))
+		c.JSON(
+			http.StatusBadRequest,
+			utils.Msg(utils.Message{Code: 0, Msg: "上传失败", Error: err}),
+		)
 	}
 }
 
@@ -68,16 +80,38 @@ func GetImgs(c *gin.Context) {
 	var err error
 	var count int
 	if id != "" {
-		err = setupDatabase.DB.Preload("Author").Where("id = ?", id).First(&imgs).Count(&count).Error
+		err = setupDatabase.
+			DB.
+			Preload("Author").
+			Where("id = ?", id).First(&imgs).
+			Count(&count).
+			Error
 	} else if userId != "" {
-		err = setupDatabase.DB.Preload("Author").Where("upload_id = ?", userId).Find(&imgs).Count(&count).Error
+		err = setupDatabase.
+			DB.
+			Preload("Author").
+			Where("upload_id = ?", userId).
+			Find(&imgs).
+			Count(&count).
+			Error
 	} else {
-		err = setupDatabase.DB.Preload("Author").Find(&imgs).Count(&count).Error
+		err = setupDatabase.
+			DB.
+			Preload("Author").
+			Find(&imgs).
+			Count(&count).
+			Error
 	}
 	if err != nil {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取失败"}, nil))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 0, Msg: "获取失败", Error: err}),
+		)
 	} else {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功", Count: count}, imgs))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 1, Msg: "获取成功", Count: count, Data: imgs}),
+		)
 	}
 }
 
@@ -110,8 +144,14 @@ func GetAllImgs(c *gin.Context) {
 			Error
 	}
 	if err != nil {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "获取失败"}, nil))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 0, Msg: "获取失败", Error: err}),
+		)
 	} else {
-		c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "获取成功", Count: count}, imgs))
+		c.JSON(
+			http.StatusOK,
+			utils.Msg(utils.Message{Code: 1, Msg: "获取成功", Count: count, Data: imgs}),
+		)
 	}
 }

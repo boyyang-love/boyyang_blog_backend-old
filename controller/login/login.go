@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:43
- * @LastEditTime: 2022-05-22 20:47:56
+ * @LastEditTime: 2022-06-03 10:45:39
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\login\login.go
@@ -14,6 +14,7 @@ import (
 	"blog/setupDatabase"
 	"blog/utils"
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -22,9 +23,13 @@ import (
 func Login(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
-	if username != "" && password != "" {
+
+	if strings.Trim(username, "") != "" && strings.Trim(password, "") != "" {
 		var user models.User
-		res := setupDatabase.DB.Where("Username = ?", username).First(&user)
+		res := setupDatabase.
+			DB.
+			Where("Username = ?", username).
+			First(&user)
 		if res.RowsAffected != 0 {
 			if user.Password == utils.MD5(password) {
 				token, _ := utils.GenerateToken(user.Username, user.Password, int(user.ID))
@@ -32,15 +37,27 @@ func Login(c *gin.Context) {
 					"info":  &user,
 					"token": token,
 				}
-				c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "登录成功"}, userMes))
+				c.JSON(
+					http.StatusOK,
+					utils.Msg(utils.Message{Code: 1, Msg: "登录成功", Data: userMes}),
+				)
 			} else {
-				c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "密码错误"}, nil))
+				c.JSON(
+					http.StatusBadRequest,
+					utils.Msg(utils.Message{Code: 0, Msg: "密码错误"}),
+				)
 			}
 		} else {
-			c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "不存在该用户"}, nil))
+			c.JSON(
+				http.StatusBadRequest,
+				utils.Msg(utils.Message{Code: 0, Msg: "不存在该用户"}),
+			)
 		}
 	} else {
-		c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "账号和密码为必填项"}, nil))
+		c.JSON(
+			http.StatusBadRequest,
+			utils.Msg(utils.Message{Code: 0, Msg: "账号和密码为必填项"}),
+		)
 	}
 
 }
@@ -49,24 +66,42 @@ func Login(c *gin.Context) {
 func Register(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
-	if username != "" && password != "" {
+	if strings.Trim(username, "") != "" && strings.Trim(password, "") != "" {
 		var user models.User
-		res := setupDatabase.DB.Where("Username = ?", username).First(&user)
+		res := setupDatabase.
+			DB.
+			Where("Username = ?", username).
+			First(&user)
 		if res.RowsAffected == 0 {
 			addUser := models.User{
 				Username: username,
 				Password: utils.MD5(password),
 			}
-			err := setupDatabase.DB.Create(&addUser).Error
+			err := setupDatabase.
+				DB.
+				Create(&addUser).
+				Error
 			if err == nil {
-				c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 1, Msg: "用户注册成功"}, nil))
+				c.JSON(
+					http.StatusOK,
+					utils.Msg(utils.Message{Code: 1, Msg: "注册成功"}),
+				)
 			} else {
-				c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "用户注册失败"}, err))
+				c.JSON(
+					http.StatusBadRequest,
+					utils.Msg(utils.Message{Code: 0, Msg: "注册失败"}),
+				)
 			}
 		} else {
-			c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "该用户名已经注册"}, nil))
+			c.JSON(
+				http.StatusBadRequest,
+				utils.Msg(utils.Message{Code: 0, Msg: "该用户已存在"}),
+			)
 		}
 	} else {
-		c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "用户名和密码为必填项"}, nil))
+		c.JSON(
+			http.StatusBadRequest,
+			utils.Msg(utils.Message{Code: 0, Msg: "账号和密码为必填项"}),
+		)
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-29 11:18:05
- * @LastEditTime: 2022-04-29 17:42:49
+ * @LastEditTime: 2022-06-03 10:53:44
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\tags\tags.go
@@ -25,16 +25,29 @@ func AddTags(c *gin.Context) {
 	tags := models.ImagesTag{
 		TagName: tag_name,
 	}
-	var err error
 	if tag_name != "" {
-		res := setupDatabase.DB.Where("tag_name = ?", tag_name).Find(&tags)
+		res := setupDatabase.
+			DB.
+			Where("tag_name = ?", tag_name).
+			Find(&tags)
 		if res.RowsAffected == 0 {
-			setupDatabase.DB.Create(&tags)
-			c.JSON(http.StatusOK, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "标签添加成功"}, err))
+			setupDatabase.
+				DB.
+				Create(&tags)
+			c.JSON(
+				http.StatusOK,
+				utils.Msg(utils.Message{Code: 1, Msg: "添加成功"}),
+			)
 		} else {
-			c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "标签名称已经存在"}, err))
+			c.JSON(
+				http.StatusBadRequest,
+				utils.Msg(utils.Message{Code: 0, Msg: "标签已存在"}),
+			)
 		}
 	} else {
-		c.JSON(http.StatusBadRequest, utils.RetunMsgFunc(utils.Code{Code: 0, Msg: "请输入标签名称"}, err))
+		c.JSON(
+			http.StatusBadRequest,
+			utils.Msg(utils.Message{Code: 0, Msg: "标签名不能为空"}),
+		)
 	}
 }
