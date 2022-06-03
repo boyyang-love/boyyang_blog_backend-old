@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-18 15:29:14
- * @LastEditTime: 2022-06-03 11:02:00
+ * @LastEditTime: 2022-06-03 11:07:03
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\middleware\tokenVerification.go
@@ -18,9 +18,7 @@ import (
 
 func TokenVerification() gin.HandlerFunc {
 	return func(c *gin.Context) {
-
 		token := c.Request.Header["Token"]
-
 		if len(token) == 0 {
 			c.JSON(
 				http.StatusOK,

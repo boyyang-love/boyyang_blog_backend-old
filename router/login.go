@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 20:12:12
- * @LastEditTime: 2022-04-05 15:38:43
+ * @LastEditTime: 2022-06-03 11:21:36
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\router\login.go
@@ -10,7 +10,7 @@
 package routers
 
 import (
-	controller "blog/controller/login"
+	controller "blog/controller/loginRegister"
 
 	"github.com/gin-gonic/gin"
 )
