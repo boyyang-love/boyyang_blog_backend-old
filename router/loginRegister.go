@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 20:12:12
- * @LastEditTime: 2022-06-03 11:21:36
+ * @LastEditTime: 2022-06-03 11:25:37
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\router\login.go
+ * @FilePath: \blog\router\loginRegister.go
  */
 
 package routers
@@ -16,9 +16,9 @@ import (
 )
 
 func LoginRouterInit(r *gin.Engine) {
-	loginRouters := r.Group("api")
+	loginRegisterRouters := r.Group("api")
 	{
-		loginRouters.POST("login", controller.Login)
-		loginRouters.POST("register", controller.Register)
+		loginRegisterRouters.POST("login", controller.Login)
+		loginRegisterRouters.POST("register", controller.Register)
 	}
 }
