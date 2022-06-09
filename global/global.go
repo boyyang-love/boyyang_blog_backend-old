@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-09 09:10:01
- * @LastEditTime: 2022-06-09 11:15:16
+ * @LastEditTime: 2022-06-09 13:14:28
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\global\global.go
@@ -14,5 +14,5 @@ import (
 	"github.com/tencentyun/cos-go-sdk-v5"
 )
 
-var DB *gorm.DB // 数据库实例
-var Client *cos.Client
+var DB *gorm.DB        // 数据库实例
+var Client *cos.Client // cos实例

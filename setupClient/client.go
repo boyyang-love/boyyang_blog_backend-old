@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-03-27 10:36:33
- * @LastEditTime: 2022-06-09 11:24:30
+ * @LastEditTime: 2022-06-09 16:15:56
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupClient\client.go
@@ -34,6 +34,6 @@ func SetupClient() *cos.Client {
 			SecretKey: setting.ClientSecretKey,
 		},
 	})
-	fmt.Println("💞🎈对象储存初始化成功")
+	fmt.Println("💞🎈🎐对象储存初始化成功")
 	return global.Client
 }

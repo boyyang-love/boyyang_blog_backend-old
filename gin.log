@@ -17,6 +17,7 @@
 [GIN-debug] POST   /api/upload               --> blog/controller/upload.Upload (5 handlers)
 [GIN-debug] GET    /api/getImgs              --> blog/controller/upload.GetImgs (5 handlers)
 [GIN-debug] GET    /api/getAllImgs           --> blog/controller/upload.GetAllImgs (5 handlers)
+[GIN-debug] GET    /api/deleteUpload         --> blog/controller/upload.DeleteUpload (5 handlers)
 [GIN-debug] POST   /api/uploadPicture        --> blog/controller/pictureWall.UploadPicture (5 handlers)
 [GIN-debug] GET    /api/getPictures          --> blog/controller/pictureWall.GetPicture (5 handlers)
 [GIN-debug] POST   /api/updatePicture        --> blog/controller/pictureWall.UpdatePicture (5 handlers)

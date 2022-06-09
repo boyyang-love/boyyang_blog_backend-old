@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 10:43:46
- * @LastEditTime: 2022-06-09 11:25:45
+ * @LastEditTime: 2022-06-09 16:16:21
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupDatabase\mysql.go
@@ -39,7 +39,7 @@ func SetupDB() *gorm.DB {
 	if err != nil {
 		panic("failed to connect database,err:" + err.Error())
 	} else {
-		fmt.Println("💞🎈数据库初始化成功")
+		fmt.Println("💞🎈🎐数据库初始化成功")
 	}
 	return global.DB
 }

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-09 10:17:04
- * @LastEditTime: 2022-06-09 10:20:01
+ * @LastEditTime: 2022-06-09 13:08:16
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupRouter\routerWithoutAuth.go
@@ -18,5 +18,4 @@ import (
 
 func SetupRouterWithoutAuth(r *gin.Engine) {
 	routers.LoginRouterInit(r) //登录注册
-
 }

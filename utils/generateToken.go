@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-18 14:33:00
- * @LastEditTime: 2022-04-28 11:23:59
+ * @LastEditTime: 2022-06-09 16:43:01
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\utils\generateToken.go
@@ -11,7 +11,6 @@ package utils
 
 import (
 	"blog/setting"
-	"fmt"
 
 	"github.com/dgrijalva/jwt-go"
 )
@@ -24,7 +23,6 @@ type Claims struct {
 }
 
 func GenerateToken(username string, password string, id int) (string, error) {
-	fmt.Println(setting.JwtSecret, username, password, id)
 	// nowTime := time.Now()
 	// expireTime := nowTime.Add(5 * time.Hour)
 	claims := Claims{
@@ -37,9 +35,7 @@ func GenerateToken(username string, password string, id int) (string, error) {
 		},
 	}
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	fmt.Println("tokenClaims", tokenClaims)
 	//该方法内部生成签名字符串，再用于获取完整、已签名的token
 	token, err := tokenClaims.SignedString(setting.JwtSecret)
-	fmt.Println(token)
 	return token, err
 }

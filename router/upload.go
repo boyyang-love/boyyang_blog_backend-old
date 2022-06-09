@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:25:46
- * @LastEditTime: 2022-04-05 15:39:01
+ * @LastEditTime: 2022-06-09 17:07:58
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\router\upload.go
@@ -21,5 +21,6 @@ func UploadRouterInit(r *gin.Engine) {
 		uploadRouters.POST("upload", controller.Upload)
 		uploadRouters.GET("getImgs", controller.GetImgs)
 		uploadRouters.GET("getAllImgs", controller.GetAllImgs)
+		uploadRouters.GET("deleteUpload", controller.DeleteUpload)
 	}
 }
