@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:14:29
- * @LastEditTime: 2022-06-03 11:14:30
+ * @LastEditTime: 2022-06-09 09:15:32
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\pictureWall\upload.go
@@ -10,8 +10,8 @@
 package controller
 
 import (
+	"blog/global"
 	"blog/models"
-	"blog/setupDatabase"
 	"blog/utils"
 	"net/http"
 
@@ -25,7 +25,7 @@ func UploadPicture(c *gin.Context) {
 	var form models.PictureWall
 	c.Bind(&form)
 	form.UserID = claims.Id
-	res := setupDatabase.
+	res := global.
 		DB.
 		Create(&form)
 	if res.Error == nil {

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:16:03
- * @LastEditTime: 2022-06-03 11:16:05
+ * @LastEditTime: 2022-06-09 09:15:23
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\pictureWall\update.go
@@ -11,8 +11,8 @@
 package controller
 
 import (
+	"blog/global"
 	"blog/models"
-	"blog/setupDatabase"
 	"blog/utils"
 	"net/http"
 
@@ -24,7 +24,7 @@ func UpdatePicture(c *gin.Context) {
 	var form models.PictureWall
 	var picture models.PictureWall
 	c.Bind(&form)
-	err := setupDatabase.
+	err := global.
 		DB.
 		Debug().
 		Omit("Author").

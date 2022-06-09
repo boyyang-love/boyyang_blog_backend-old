@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
- * @LastEditTime: 2022-06-03 10:59:24
+ * @LastEditTime: 2022-06-09 11:17:31
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\upload\upload.go
@@ -10,9 +10,8 @@
 package controller
 
 import (
+	"blog/global"
 	"blog/models"
-	client "blog/setupClient"
-	"blog/setupDatabase"
 	"blog/utils"
 	"context"
 	"fmt"
@@ -26,7 +25,6 @@ import (
 func Upload(c *gin.Context) {
 	token := c.Request.Header.Get("token")
 	file, _ := c.FormFile("file")
-	client := client.SetupClient()
 	opt := &cos.ObjectPutOptions{
 		ObjectPutHeaderOptions: &cos.ObjectPutHeaderOptions{
 			ContentType: "image/jpeg",
@@ -37,7 +35,7 @@ func Upload(c *gin.Context) {
 		path := fmt.Sprintf("/%d/%s/%s", claims.Id, "images", file.Filename)
 		f, _ := file.Open()
 		var err error
-		_, err = client.Object.Put(context.Background(), path, f, opt)
+		_, err = global.Client.Object.Put(context.Background(), path, f, opt)
 		if err != nil {
 			panic(err)
 		}
@@ -46,7 +44,7 @@ func Upload(c *gin.Context) {
 			FileName: file.Filename,
 			UserID:   claims.Id,
 		}
-		err = setupDatabase.
+		err = global.
 			DB.
 			Create(&upload).
 			Error
@@ -80,14 +78,14 @@ func GetImgs(c *gin.Context) {
 	var err error
 	var count int
 	if id != "" {
-		err = setupDatabase.
+		err = global.
 			DB.
 			Preload("Author").
 			Where("id = ?", id).First(&imgs).
 			Count(&count).
 			Error
 	} else if userId != "" {
-		err = setupDatabase.
+		err = global.
 			DB.
 			Preload("Author").
 			Where("upload_id = ?", userId).
@@ -95,7 +93,7 @@ func GetImgs(c *gin.Context) {
 			Count(&count).
 			Error
 	} else {
-		err = setupDatabase.
+		err = global.
 			DB.
 			Preload("Author").
 			Find(&imgs).
@@ -123,7 +121,7 @@ func GetAllImgs(c *gin.Context) {
 	var count int
 	var err error
 	if page == 0 && limit == 0 {
-		err = setupDatabase.
+		err = global.
 			DB.
 			Order("id desc").
 			Preload("Author").
@@ -131,7 +129,7 @@ func GetAllImgs(c *gin.Context) {
 			Count(&count).
 			Error
 	} else {
-		err = setupDatabase.
+		err = global.
 			DB.
 			Order("id desc").
 			Limit(limit).

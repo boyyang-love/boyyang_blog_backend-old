@@ -1,0 +1,27 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /assets/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] HEAD   /assets/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] POST   /api/login                --> blog/controller/loginRegister.Login (4 handlers)
+[GIN-debug] POST   /api/register             --> blog/controller/loginRegister.Register (4 handlers)
+[GIN-debug] POST   /api/updateUser           --> blog/controller/user.UpdateUser (5 handlers)
+[GIN-debug] GET    /api/articles             --> blog/controller/article.GetArticles (5 handlers)
+[GIN-debug] GET    /api/articlesDetail       --> blog/controller/article.GetArticleDetail (5 handlers)
+[GIN-debug] POST   /api/addArticle           --> blog/controller/article.AddArticle (5 handlers)
+[GIN-debug] POST   /api/delArticle           --> blog/controller/article.DelArticle (5 handlers)
+[GIN-debug] GET    /api/thumbsUp             --> blog/controller/article.ThumbsUp (5 handlers)
+[GIN-debug] POST   /api/upload               --> blog/controller/upload.Upload (5 handlers)
+[GIN-debug] GET    /api/getImgs              --> blog/controller/upload.GetImgs (5 handlers)
+[GIN-debug] GET    /api/getAllImgs           --> blog/controller/upload.GetAllImgs (5 handlers)
+[GIN-debug] POST   /api/uploadPicture        --> blog/controller/pictureWall.UploadPicture (5 handlers)
+[GIN-debug] GET    /api/getPictures          --> blog/controller/pictureWall.GetPicture (5 handlers)
+[GIN-debug] POST   /api/updatePicture        --> blog/controller/pictureWall.UpdatePicture (5 handlers)
+[GIN-debug] GET    /api/deletePicture        --> blog/controller/pictureWall.DeletePicture (5 handlers)
+[GIN-debug] POST   /api/tags/add             --> blog/controller/tags.AddTags (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :80

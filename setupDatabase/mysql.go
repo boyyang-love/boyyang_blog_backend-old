@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 10:43:46
- * @LastEditTime: 2022-05-21 15:10:53
+ * @LastEditTime: 2022-06-09 11:25:45
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupDatabase\mysql.go
@@ -9,23 +9,22 @@
 package setupDatabase
 
 import (
-	"blog/models"
+	"blog/global"
+	"blog/setting"
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 )
 
-var DB *gorm.DB
-
 //数据库连接
 func SetupDB() *gorm.DB {
 	driverName := "mysql"
-	host := "sh-cynosdbmysql-grp-q87hvhhs.sql.tencentcdb.com" //127.0.0.1
-	port := "26019"                                           //3306
-	database := "boyyang"
-	username := "root"
-	password := "zxgf8bTa" // root
+	host := setting.MysqlHost //127.0.0.1
+	port := setting.MysqlPort //3306
+	database := setting.MysqlDatabase
+	username := setting.MysqlUserName
+	password := setting.MysqlPassword
 	charset := "utf8"
 	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true",
 		username,
@@ -36,22 +35,11 @@ func SetupDB() *gorm.DB {
 		charset,
 	)
 	var err error
-	DB, err = gorm.Open(driverName, args)
-	//db, err := gorm.Open("mysql", "user:islot@/blog?charset=utf8&parseTime=True&loc=Local")
+	global.DB, err = gorm.Open(driverName, args)
 	if err != nil {
 		panic("failed to connect database,err:" + err.Error())
 	} else {
-		fmt.Println(args)
-		fmt.Println("<<<<mysql连接成功>>>>")
+		fmt.Println("💞🎈数据库初始化成功")
 	}
-	DB.AutoMigrate(
-		&models.User{},
-		&models.Article{},
-		&models.Upload{},
-		&models.PictureWall{},
-		&models.ImagesTag{},
-	)
-	// DB.AutoMigrate(&models.Article{})
-	// DB.AutoMigrate(&models.Upload{})
-	return DB
+	return global.DB
 }

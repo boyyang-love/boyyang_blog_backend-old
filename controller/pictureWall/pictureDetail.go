@@ -1,18 +1,18 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-03 00:35:57
- * @LastEditTime: 2022-06-03 11:20:09
+ * @LastEditTime: 2022-06-09 09:15:15
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\controller\pictureWall\pictureWall.go
+ * @FilePath: \blog\controller\pictureWall\pictureDetail.go
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
 package controller
 
 import (
+	"blog/global"
 	"blog/models"
-	"blog/setupDatabase"
 	"blog/utils"
 	"net/http"
 
@@ -23,7 +23,7 @@ import (
 func GetPictureDetail(c *gin.Context) {
 	id := c.Param("id")
 	var picture models.PictureWall
-	err := setupDatabase.
+	err := global.
 		DB.
 		First(&picture, id).
 		Error

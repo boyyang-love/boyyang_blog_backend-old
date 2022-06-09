@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-29 11:18:05
- * @LastEditTime: 2022-06-03 10:53:44
+ * @LastEditTime: 2022-06-09 09:15:44
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\tags\tags.go
@@ -11,8 +11,8 @@
 package controllers
 
 import (
+	"blog/global"
 	"blog/models"
-	"blog/setupDatabase"
 	"blog/utils"
 	"net/http"
 
@@ -26,12 +26,12 @@ func AddTags(c *gin.Context) {
 		TagName: tag_name,
 	}
 	if tag_name != "" {
-		res := setupDatabase.
+		res := global.
 			DB.
 			Where("tag_name = ?", tag_name).
 			Find(&tags)
 		if res.RowsAffected == 0 {
-			setupDatabase.
+			global.
 				DB.
 				Create(&tags)
 			c.JSON(

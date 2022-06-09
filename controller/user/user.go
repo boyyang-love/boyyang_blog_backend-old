@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:53
- * @LastEditTime: 2022-06-03 11:01:23
+ * @LastEditTime: 2022-06-09 09:16:40
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\user\user.go
@@ -9,8 +9,8 @@
 package controller
 
 import (
+	"blog/global"
 	"blog/models"
-	"blog/setupDatabase"
 	"blog/utils"
 	"net/http"
 
@@ -23,7 +23,7 @@ func UpdateUser(c *gin.Context) {
 	var form models.User
 	c.Bind(&form)
 	var user models.User
-	data := setupDatabase.
+	data := global.
 		DB.
 		Where("Username = ? AND ID != ? ", form.Username, claims.Id).
 		First(&user)
@@ -35,7 +35,7 @@ func UpdateUser(c *gin.Context) {
 		)
 		return
 	}
-	err := setupDatabase.
+	err := global.
 		DB.
 		Model(models.User{}).
 		Where("id = ?", claims.Id).

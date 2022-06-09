@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:43
- * @LastEditTime: 2022-06-03 11:12:38
+ * @LastEditTime: 2022-06-09 09:14:25
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\loginRegister\login.go
@@ -10,8 +10,8 @@
 package controller
 
 import (
+	"blog/global"
 	"blog/models"
-	"blog/setupDatabase"
 	"blog/utils"
 	"net/http"
 	"strings"
@@ -25,7 +25,7 @@ func Login(c *gin.Context) {
 	password := c.PostForm("password")
 	if strings.Trim(username, "") != "" && strings.Trim(password, "") != "" {
 		var user models.User
-		res := setupDatabase.
+		res := global.
 			DB.
 			Where("Username = ?", username).
 			First(&user)

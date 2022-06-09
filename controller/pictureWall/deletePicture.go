@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:19:09
- * @LastEditTime: 2022-06-04 11:23:38
+ * @LastEditTime: 2022-06-09 09:14:49
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\pictureWall\deletePicture.go
@@ -11,8 +11,8 @@
 package controller
 
 import (
+	"blog/global"
 	"blog/models"
-	"blog/setupDatabase"
 	"blog/utils"
 	"net/http"
 	"strings"
@@ -30,7 +30,7 @@ func DeletePicture(c *gin.Context) {
 			utils.Msg(utils.Message{Code: 0, Msg: "id不能为空"}),
 		)
 	} else {
-		err := setupDatabase.
+		err := global.
 			DB.
 			Debug().
 			Where("id = ?", id).

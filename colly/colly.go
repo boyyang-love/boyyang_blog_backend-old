@@ -1,14 +1,14 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-06 09:49:04
- * @LastEditTime: 2022-06-08 18:07:35
+ * @LastEditTime: 2022-06-09 08:36:58
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\colly\colly.go
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-package colly_test
+package main
 
 import (
 	"fmt"
@@ -74,7 +74,17 @@ func download(url string, name string) {
 	}
 }
 
-func init() {
-	collyInit()
-	wg.Wait()
+func main() {
+	// collyInit()
+	// wg.Wait()
+	var test int = 15
+	var age string
+	if test > 10 {
+		age = "大于10"
+	} else {
+		age = "小于10"
+	}
+	fmt.Println(&test)
+	fmt.Println(age)
+
 }

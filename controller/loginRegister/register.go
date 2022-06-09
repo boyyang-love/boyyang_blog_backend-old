@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:11:28
- * @LastEditTime: 2022-06-03 11:12:34
+ * @LastEditTime: 2022-06-09 09:14:39
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\loginRegister\register.go
@@ -11,8 +11,8 @@
 package controller
 
 import (
+	"blog/global"
 	"blog/models"
-	"blog/setupDatabase"
 	"blog/utils"
 	"net/http"
 	"strings"
@@ -26,7 +26,7 @@ func Register(c *gin.Context) {
 	password := c.PostForm("password")
 	if strings.Trim(username, "") != "" && strings.Trim(password, "") != "" {
 		var user models.User
-		res := setupDatabase.
+		res := global.
 			DB.
 			Where("Username = ?", username).
 			First(&user)
@@ -35,7 +35,7 @@ func Register(c *gin.Context) {
 				Username: username,
 				Password: utils.MD5(password),
 			}
-			err := setupDatabase.
+			err := global.
 				DB.
 				Create(&addUser).
 				Error

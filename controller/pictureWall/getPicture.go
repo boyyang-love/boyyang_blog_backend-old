@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:18:03
- * @LastEditTime: 2022-06-03 11:18:05
+ * @LastEditTime: 2022-06-09 09:15:00
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\pictureWall\getPicture.go
@@ -10,8 +10,8 @@
 package controller
 
 import (
+	"blog/global"
 	"blog/models"
-	"blog/setupDatabase"
 	"blog/utils"
 	"net/http"
 	"strconv"
@@ -30,7 +30,7 @@ func GetPicture(c *gin.Context) {
 	var count int
 	var err error
 	if page == 0 && limit == 0 {
-		err = setupDatabase.
+		err = global.
 			DB.
 			Order("id desc").
 			Preload("Author").
@@ -40,7 +40,7 @@ func GetPicture(c *gin.Context) {
 			Count(&count).
 			Error
 	} else {
-		err = setupDatabase.
+		err = global.
 			DB.
 			Order("id desc").
 			Limit(limit).

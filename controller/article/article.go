@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 10:20:47
- * @LastEditTime: 2022-06-02 19:23:16
+ * @LastEditTime: 2022-06-09 09:14:08
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\controller\article\article.go
@@ -11,8 +11,8 @@
 package controller
 
 import (
+	"blog/global"
 	"blog/models"
-	"blog/setupDatabase"
 	"blog/utils"
 	"net/http"
 	"strconv"
@@ -30,13 +30,13 @@ func GetArticles(c *gin.Context) {
 	var articles []models.Article
 	var count int
 	if _page == 0 && _limit == 0 {
-		setupDatabase.
+		global.
 			DB.
 			Preload("Author").
 			Find(&articles).
 			Count(&count)
 	} else {
-		setupDatabase.
+		global.
 			DB.
 			Limit(_limit).
 			Offset((_page - 1) * _limit).
@@ -63,7 +63,7 @@ func GetArticleDetail(c *gin.Context) {
 		return
 	}
 	var article models.Article
-	setupDatabase.
+	global.
 		DB.
 		Preload("Author").
 		Where("id = ?", id).
@@ -99,7 +99,7 @@ func AddArticle(c *gin.Context) {
 			Content:  content,
 			UserID:   author_id,
 		}
-		err := setupDatabase.
+		err := global.
 			DB.
 			Create(&article).
 			Error
@@ -121,7 +121,7 @@ func AddArticle(c *gin.Context) {
 func DelArticle(c *gin.Context) {
 	id := c.PostForm("id")
 	var articel models.Article
-	err := setupDatabase.
+	err := global.
 		DB.Where("id = ?", id).
 		Delete(&articel).
 		Error
@@ -141,7 +141,7 @@ func DelArticle(c *gin.Context) {
 // 文章点赞
 func ThumbsUp(c *gin.Context) {
 	id := c.Query("id")
-	err := setupDatabase.
+	err := global.
 		DB.
 		Model(&models.Article{}).
 		Where("id = ?", id).
