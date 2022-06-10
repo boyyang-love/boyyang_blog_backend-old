@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 19:45:12
- * @LastEditTime: 2022-06-09 16:25:18
+ * @LastEditTime: 2022-06-10 19:34:35
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\main.go
@@ -14,9 +14,12 @@ import (
 	"blog/setupClient"
 	setupDatabase "blog/setupDatabase"
 	setupRouter "blog/setupRouter"
+	setupViper "blog/setupViper"
 )
 
 func main() {
+	// 初始化viper配置
+	setupViper.Viper()
 	// mysql数据库初始化
 	setupDatabase.SetupDB()
 	if global.DB != nil {

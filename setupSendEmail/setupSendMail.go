@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-10 11:01:13
- * @LastEditTime: 2022-06-10 15:46:17
+ * @LastEditTime: 2022-06-10 19:43:24
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupSendEmail\setupSendMail.go
@@ -11,6 +11,7 @@
 package setupSendEmail
 
 import (
+	"blog/global"
 	"log"
 	"net/smtp"
 
@@ -18,17 +19,18 @@ import (
 )
 
 func SendEmail(to string, title string, content string) {
-	// template
-	e := email.NewEmail()
-	e.From = "boyyang个人博客网站 <1761617270@qq.com>"
-	// 设置接收方的邮箱
-	e.To = []string{to}
-	//设置主题
-	e.Subject = title
-	//设置文件发送的内容
-	e.Text = []byte(content)
+	emailConfig := global.Config.Email
+	e := &email.Email{
+		From:    emailConfig.From,
+		To:      []string{to},
+		Subject: title,
+		Text:    []byte(content),
+	}
 	//设置服务器相关的配置
-	err := e.Send("smtp.qq.com:25", smtp.PlainAuth("", "1761617270@qq.com", "nqhwetnrlyxxdedi", "smtp.qq.com"))
+	err := e.Send(
+		"smtp.qq.com:25",
+		smtp.PlainAuth("", emailConfig.From, emailConfig.SmtpKey, "smtp.qq.com"),
+	)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-03-27 10:36:33
- * @LastEditTime: 2022-06-09 16:15:56
+ * @LastEditTime: 2022-06-10 19:15:34
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupClient\client.go
@@ -23,15 +23,16 @@ import (
 func SetupClient() *cos.Client {
 	u, _ := url.Parse(setting.ClientUrl)
 	b := &cos.BaseURL{BucketURL: u}
+	cloudBaseConfig := global.Config.CloudBase
 	global.Client = cos.NewClient(b, &http.Client{
 		Transport: &cos.AuthorizationTransport{
 			// 通过环境变量获取密钥
 			// 环境变量 SECRETID 表示用户的 SecretId，登录访问管理控制台查看密钥，
 			// https://console.cloud.tencent.com/cam/capi
-			SecretID: setting.ClientSecretID,
+			SecretID: cloudBaseConfig.ClientSecretID,
 			// 环境变量 SECRETKEY 表示用户的 SecretKey，登录访问管理控制台查看密钥，
 			// https://console.cloud.tencent.com/cam/capi
-			SecretKey: setting.ClientSecretKey,
+			SecretKey: cloudBaseConfig.ClientSecretKey,
 		},
 	})
 	fmt.Println("💞🎈🎐对象储存初始化成功")

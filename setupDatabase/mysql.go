@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 10:43:46
- * @LastEditTime: 2022-06-10 08:35:21
+ * @LastEditTime: 2022-06-10 19:23:08
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupDatabase\mysql.go
@@ -10,7 +10,6 @@ package setupDatabase
 
 import (
 	"blog/global"
-	"blog/setting"
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -19,14 +18,15 @@ import (
 
 //数据库连接
 func SetupDB() *gorm.DB {
+	mysqlConfig := global.Config.Mysql
 	driverName := "mysql"
-	host := setting.MysqlHost //127.0.0.1
-	port := setting.MysqlPort //3306
-	database := setting.MysqlDatabase
-	username := setting.MysqlUserName
-	password := setting.MysqlPassword
+	host := mysqlConfig.Host
+	port := mysqlConfig.Port
+	database := mysqlConfig.Database
+	username := mysqlConfig.Username
+	password := mysqlConfig.Password
 	charset := "utf8"
-	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true",
+	args := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=true",
 		username,
 		password,
 		host,

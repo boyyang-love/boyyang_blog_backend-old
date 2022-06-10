@@ -1,0 +1,18 @@
+# mysql 配置
+mysql:
+    host: 'sh-cynosdbmysql-grp-q87hvhhs.sql.tencentcdb.com'
+    port: 26019
+    username: 'root'
+    password: 'zxgf8bTa'
+    database: 'boyyang'
+
+# 腾讯云对象存储
+cloudBase:
+    clientUrl: 'https://7072-prod-2g489qm8208c3cfd-1301921121.cos.ap-shanghai.myqcloud.com'
+    clientSecretID: 'AKID85lAJBm6AyVljQr0sSmpfKn0vZw3sQhh'
+    clientSecretKey: 'DPLzNUKtBk23nGRM0MREkzxd3C4f03p'
+
+# email 发送配置
+email:
+    from: '1761617270@qq.com'
+    smtpKey: 'nqhwetnrlyxxdedi'

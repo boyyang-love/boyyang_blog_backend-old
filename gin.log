@@ -8,7 +8,7 @@
 [GIN-debug] HEAD   /assets/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
 [GIN-debug] POST   /api/login                --> blog/api/loginRegister.Login (4 handlers)
 [GIN-debug] POST   /api/register             --> blog/api/loginRegister.Register (4 handlers)
-[GIN-debug] GET    /api/sendEmail            --> blog/api/sendEmail.SEmail (4 handlers)
+[GIN-debug] GET    /api/sendEmail            --> blog/api/sendEmail.SendEmail (4 handlers)
 [GIN-debug] POST   /api/updateUser           --> blog/api/user.UpdateUser (5 handlers)
 [GIN-debug] GET    /api/articles             --> blog/api/article.GetArticles (5 handlers)
 [GIN-debug] GET    /api/articlesDetail       --> blog/api/article.GetArticleDetail (5 handlers)
