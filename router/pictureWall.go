@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-03 09:04:46
- * @LastEditTime: 2022-06-04 10:44:39
+ * @LastEditTime: 2022-06-10 15:41:13
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\router\pictureWall.go
@@ -11,7 +11,7 @@
 package routers
 
 import (
-	controller "blog/controller/pictureWall"
+	api "blog/api/pictureWall"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,9 +19,9 @@ import (
 func PictureWallRouterInit(r *gin.Engine) {
 	pictureWallRouters := r.Group("api")
 	{
-		pictureWallRouters.POST("uploadPicture", controller.UploadPicture)
-		pictureWallRouters.GET("getPictures", controller.GetPicture)
-		pictureWallRouters.POST("updatePicture", controller.UpdatePicture)
-		pictureWallRouters.GET("deletePicture", controller.DeletePicture)
+		pictureWallRouters.POST("uploadPicture", api.UploadPicture)
+		pictureWallRouters.GET("getPictures", api.GetPicture)
+		pictureWallRouters.POST("updatePicture", api.UpdatePicture)
+		pictureWallRouters.GET("deletePicture", api.DeletePicture)
 	}
 }

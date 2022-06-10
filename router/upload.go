@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:25:46
- * @LastEditTime: 2022-06-09 17:07:58
+ * @LastEditTime: 2022-06-10 15:41:50
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\router\upload.go
@@ -10,7 +10,7 @@
 package routers
 
 import (
-	controller "blog/controller/upload"
+	api "blog/api/upload"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,9 +18,9 @@ import (
 func UploadRouterInit(r *gin.Engine) {
 	uploadRouters := r.Group("api")
 	{
-		uploadRouters.POST("upload", controller.Upload)
-		uploadRouters.GET("getImgs", controller.GetImgs)
-		uploadRouters.GET("getAllImgs", controller.GetAllImgs)
-		uploadRouters.GET("deleteUpload", controller.DeleteUpload)
+		uploadRouters.POST("upload", api.Upload)
+		uploadRouters.GET("getImgs", api.GetImgs)
+		uploadRouters.GET("getAllImgs", api.GetAllImgs)
+		uploadRouters.GET("deleteUpload", api.DeleteUpload)
 	}
 }

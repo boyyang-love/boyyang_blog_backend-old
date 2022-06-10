@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-29 11:20:12
- * @LastEditTime: 2022-04-29 11:23:54
+ * @LastEditTime: 2022-06-10 15:41:38
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\router\tags.go
@@ -11,7 +11,7 @@
 package routers
 
 import (
-	controller "blog/controller/tags"
+	api "blog/api/tags"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,6 +19,6 @@ import (
 func TagsRouterInit(r *gin.Engine) {
 	tagsRouters := r.Group("api")
 	{
-		tagsRouters.POST("tags/add", controller.AddTags)
+		tagsRouters.POST("tags/add", api.AddTags)
 	}
 }
