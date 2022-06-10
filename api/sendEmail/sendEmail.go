@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-10 14:50:28
- * @LastEditTime: 2022-06-10 15:39:31
+ * @LastEditTime: 2022-06-10 15:50:47
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\api\sendEmail\sendEmail.go
@@ -11,14 +11,14 @@
 package api
 
 import (
-	"blog/sendMail"
+	"blog/setupSendEmail"
 
 	"github.com/gin-gonic/gin"
 )
 
-func SEmail(c *gin.Context) {
+func SendEmail(c *gin.Context) {
 	to := "1761617270@qq.com"
 	title := "个人博客网站注册"
 	content := "<h1>欢迎注册个人博客网站</h1>"
-	sendMail.SendEmail(to, title, content)
+	setupSendEmail.SendEmail(to, title, content)
 }

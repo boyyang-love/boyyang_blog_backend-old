@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-10 14:57:50
- * @LastEditTime: 2022-06-10 15:41:24
+ * @LastEditTime: 2022-06-10 15:50:15
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\router\sendMail.go
+ * @FilePath: \blog\router\sendEmail.go
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -19,6 +19,6 @@ import (
 func SendMailRouterInit(r *gin.Engine) {
 	sendMailRouters := r.Group("api")
 	{
-		sendMailRouters.GET("sendEmail", api.SEmail)
+		sendMailRouters.GET("sendEmail", api.SendEmail)
 	}
 }

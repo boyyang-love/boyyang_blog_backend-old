@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:11:28
- * @LastEditTime: 2022-06-10 15:38:27
+ * @LastEditTime: 2022-06-10 15:51:37
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\api\loginRegister\register.go
@@ -13,7 +13,7 @@ package api
 import (
 	"blog/global"
 	"blog/models"
-	"blog/sendMail"
+	"blog/setupSendEmail"
 	"blog/utils"
 	"net/http"
 	"strings"
@@ -43,7 +43,7 @@ func Register(c *gin.Context) {
 				Create(&addUser).
 				Error
 			if err == nil {
-				sendMail.SendEmail(email, "个人博客网站注册", "注册成功")
+				setupSendEmail.SendEmail(email, "个人博客网站注册", "注册成功")
 				c.JSON(
 					http.StatusOK,
 					utils.Msg(utils.Message{Code: 1, Msg: "注册成功"}),
