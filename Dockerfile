@@ -14,6 +14,6 @@ WORKDIR /app
 
 COPY --from=builder /app/main .
 
-CMD ["/app/main"]
-
 ENTRYPOINT /app -c config.yaml
+
+
