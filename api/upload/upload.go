@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
- * @LastEditTime: 2022-06-10 15:39:59
+ * @LastEditTime: 2022-06-11 13:39:29
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\api\upload\upload.go
@@ -37,30 +37,33 @@ func Upload(c *gin.Context) {
 		var err error
 		_, err = global.Client.Object.Put(context.Background(), path, f, opt)
 		if err != nil {
-			panic(err)
+			c.JSON(
+				http.StatusBadRequest,
+				utils.Msg(utils.Message{Code: 0, Msg: "对象存储存储错误", Error: err}),
+			)
 		}
 		upload := models.Upload{
 			Url:      path,
 			FileName: file.Filename,
 			UserID:   claims.Id,
 		}
-		err = global.
+		result := global.
 			DB.
-			Create(&upload).
-			Error
-		if err != nil {
+			Create(&upload)
+		if result.Error != nil {
 			c.JSON(
 				http.StatusBadRequest,
 				utils.Msg(utils.Message{Code: 0, Msg: "上传失败", Error: err}),
 			)
 		} else {
-			msg := map[string]interface{}{
+			data := map[string]interface{}{
+				"id":       result.Value.(*models.Upload).ID,
 				"fileName": file.Filename,
 				"url":      path,
 			}
 			c.JSON(
 				http.StatusOK,
-				utils.Msg(utils.Message{Code: 1, Msg: "上传成功", Data: msg}),
+				utils.Msg(utils.Message{Code: 1, Msg: "上传成功", Data: data}),
 			)
 		}
 	} else {

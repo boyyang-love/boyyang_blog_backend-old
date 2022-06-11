@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-03-27 10:36:33
- * @LastEditTime: 2022-06-10 19:15:34
+ * @LastEditTime: 2022-06-11 12:44:03
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupClient\client.go
@@ -12,7 +12,6 @@ package setupClient
 
 import (
 	"blog/global"
-	"blog/setting"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -21,9 +20,9 @@ import (
 )
 
 func SetupClient() *cos.Client {
-	u, _ := url.Parse(setting.ClientUrl)
-	b := &cos.BaseURL{BucketURL: u}
 	cloudBaseConfig := global.Config.CloudBase
+	u, _ := url.Parse(cloudBaseConfig.ClientUrl)
+	b := &cos.BaseURL{BucketURL: u}
 	global.Client = cos.NewClient(b, &http.Client{
 		Transport: &cos.AuthorizationTransport{
 			// 通过环境变量获取密钥

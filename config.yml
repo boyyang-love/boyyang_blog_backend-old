@@ -9,8 +9,8 @@ mysql:
 # 腾讯云对象存储
 cloudBase:
     clientUrl: 'https://7072-prod-2g489qm8208c3cfd-1301921121.cos.ap-shanghai.myqcloud.com'
-    clientSecretID: 'AKID85lAJBm6AyVljQr0sSmpfKn0vZw3sQhh'
-    clientSecretKey: 'DPLzNUKtBk23nGRM0MREkzxd3C4f03p'
+    clientSecretID: 'AKIDb3GDuMYT7UaPxDDwNXQ2B5j6C1Zrsd7K'
+    clientSecretKey: 'xd3C4f04rNcbKmxrVszoSpvkIZZIjtmO'
 
 # email 发送配置
 email:

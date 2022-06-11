@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:19:09
- * @LastEditTime: 2022-06-10 15:38:38
+ * @LastEditTime: 2022-06-11 13:06:31
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\api\pictureWall\deletePicture.go
@@ -14,6 +14,7 @@ import (
 	"blog/global"
 	"blog/models"
 	"blog/utils"
+	"context"
 	"net/http"
 	"strings"
 
@@ -34,13 +35,23 @@ func DeletePicture(c *gin.Context) {
 			DB.
 			Debug().
 			Where("id = ?", id).
+			First(&picture).
 			Delete(&picture).
 			Error
 		if err == nil {
-			c.JSON(
-				http.StatusOK,
-				utils.Msg(utils.Message{Code: 1, Msg: "删除成功"}),
-			)
+			path := picture.Url
+			_, err = global.Client.Object.Delete(context.Background(), path)
+			if err == nil {
+				c.JSON(
+					http.StatusOK,
+					utils.Msg(utils.Message{Code: 1, Msg: "删除成功"}),
+				)
+			} else {
+				c.JSON(
+					http.StatusBadRequest,
+					utils.Msg(utils.Message{Code: 1, Msg: "对象存储图片删除失败", Error: err}),
+				)
+			}
 		} else {
 			c.JSON(
 				http.StatusOK,

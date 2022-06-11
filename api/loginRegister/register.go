@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:11:28
- * @LastEditTime: 2022-06-10 15:51:37
+ * @LastEditTime: 2022-06-11 11:54:51
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\api\loginRegister\register.go
@@ -31,6 +31,7 @@ func Register(c *gin.Context) {
 		res := global.
 			DB.
 			Where("Username = ?", username).
+			Or("Email = ?", email).
 			First(&user)
 		if res.RowsAffected == 0 {
 			addUser := models.User{
@@ -63,7 +64,7 @@ func Register(c *gin.Context) {
 	} else {
 		c.JSON(
 			http.StatusBadRequest,
-			utils.Msg(utils.Message{Code: 0, Msg: "账号和密码为必填项"}),
+			utils.Msg(utils.Message{Code: 0, Msg: "账号,密码,邮箱为必填项"}),
 		)
 	}
 }
