@@ -13,7 +13,8 @@ FROM alpine:latest
 WORKDIR /app
 
 COPY --from=builder /app/main .
+COPY --from=builder /app/config.yaml .
 
-ENTRYPOINT /app -c config.yaml
+CMD ["/app/main"]
 
 
