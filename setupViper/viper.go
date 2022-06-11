@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-10 17:39:26
- * @LastEditTime: 2022-06-11 20:11:12
+ * @LastEditTime: 2022-06-11 20:23:24
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\setupViper\viper.go
@@ -19,7 +19,7 @@ import (
 
 func Viper() *viper.Viper {
 	v := viper.New()
-	v.SetConfigFile("./config.yml")
+	v.SetConfigFile("/app/config.yml")
 	v.SetConfigType("yaml")
 	err := v.ReadInConfig()
 	if err != nil {
