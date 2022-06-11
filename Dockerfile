@@ -16,4 +16,4 @@ COPY --from=builder /app/main .
 
 CMD ["/app/main"]
 
-ENTRYPOINT ./blog -c config.yaml
+ENTRYPOINT /app -c config.yaml
