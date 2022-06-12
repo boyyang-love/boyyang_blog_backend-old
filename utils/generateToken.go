@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-18 14:33:00
- * @LastEditTime: 2022-06-09 16:43:01
+ * @LastEditTime: 2022-06-12 19:10:23
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\utils\generateToken.go
+ * @FilePath: \blog\server\utils\generateToken.go
  */
 
 package utils
@@ -18,16 +18,18 @@ import (
 type Claims struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
+	Email    string `json:"email"`
 	Id       int    `json:"user_id"`
 	jwt.StandardClaims
 }
 
-func GenerateToken(username string, password string, id int) (string, error) {
+func GenerateToken(username string, password string, id int, email string) (string, error) {
 	// nowTime := time.Now()
 	// expireTime := nowTime.Add(5 * time.Hour)
 	claims := Claims{
 		Username: username,
 		Password: password,
+		Email:    email,
 		Id:       id,
 		StandardClaims: jwt.StandardClaims{
 			// ExpiresAt: expireTime.Unix(),

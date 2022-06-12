@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:43
- * @LastEditTime: 2022-06-10 15:38:16
+ * @LastEditTime: 2022-06-12 19:11:29
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\api\loginRegister\login.go
+ * @FilePath: \blog\server\api\loginRegister\login.go
  */
 
 package api
@@ -31,7 +31,7 @@ func Login(c *gin.Context) {
 			First(&user)
 		if res.RowsAffected != 0 {
 			if user.Password == utils.MD5(password) {
-				token, _ := utils.GenerateToken(user.Username, user.Password, int(user.ID))
+				token, _ := utils.GenerateToken(user.Username, user.Password, int(user.ID), *user.Email)
 				userMes := map[string]interface{}{
 					"info":  &user,
 					"token": token,

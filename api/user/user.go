@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:53
- * @LastEditTime: 2022-06-10 15:40:10
+ * @LastEditTime: 2022-06-12 19:20:47
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\api\user\user.go
+ * @FilePath: \blog\server\api\user\user.go
  */
 package api
 
@@ -13,6 +13,7 @@ import (
 	"blog/models"
 	"blog/utils"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -20,36 +21,45 @@ import (
 func UpdateUser(c *gin.Context) {
 	token := c.Request.Header.Get("token")
 	claims, _ := utils.ParseToken(token)
-	var form models.User
-	c.Bind(&form)
-	var user models.User
-	data := global.
+	username := c.PostForm("username")
+	qq := c.PostForm("qq")
+	birthday := c.PostForm("birthday")
+	sex, _ := strconv.Atoi(c.PostForm("sex"))
+	blog_url := c.PostForm("blog_url")
+	user := models.User{
+		Username: username,
+		Qq:       &qq,
+		Birthday: &birthday,
+		Sex:      &sex,
+		BlogUrl:  &blog_url,
+	}
+	res := global.
 		DB.
-		Where("Username = ? AND ID != ? ", form.Username, claims.Id).
-		First(&user)
-	// 如果用户存
-	if data.RowsAffected > 0 {
+		Where("username = ? and id <> ?", username, claims.Id).
+		Find(&models.User{})
+	if res.RowsAffected > 0 {
 		c.JSON(
 			http.StatusBadRequest,
 			utils.Msg(utils.Message{Code: 0, Msg: "用户名已存在"}),
 		)
-		return
-	}
-	err := global.
-		DB.
-		Model(models.User{}).
-		Where("id = ?", claims.Id).
-		Update(&form).
-		Error
-	if err == nil {
-		c.JSON(
-			http.StatusOK,
-			utils.Msg(utils.Message{Code: 1, Msg: "更新成功", Data: form.ID}),
-		)
 	} else {
-		c.JSON(
-			http.StatusBadRequest,
-			utils.Msg(utils.Message{Code: 0, Msg: "更新失败", Data: err}),
-		)
+		err := global.
+			DB.
+			Model(models.User{}).
+			Where("id = ?", claims.Id).
+			Update(&user).
+			Error
+		if err == nil {
+			c.JSON(
+				http.StatusOK,
+				utils.Msg(utils.Message{Code: 1, Msg: "更新成功"}),
+			)
+		} else {
+			c.JSON(
+				http.StatusBadRequest,
+				utils.Msg(utils.Message{Code: 0, Msg: "更新失败"}),
+			)
+		}
 	}
+
 }
