@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 17:01:43
- * @LastEditTime: 2022-06-12 19:11:29
+ * @LastEditTime: 2022-06-13 13:28:21
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\api\loginRegister\login.go
@@ -24,12 +24,13 @@ func Login(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
 	if strings.Trim(username, "") != "" && strings.Trim(password, "") != "" {
-		var user models.User
 		res := global.
 			DB.
 			Where("Username = ?", username).
-			First(&user)
+			Find(&models.User{})
 		if res.RowsAffected != 0 {
+			var user models.User
+			res.Scan(&user)
 			if user.Password == utils.MD5(password) {
 				token, _ := utils.GenerateToken(user.Username, user.Password, int(user.ID), *user.Email)
 				userMes := map[string]interface{}{

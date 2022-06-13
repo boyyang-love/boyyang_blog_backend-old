@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:11:28
- * @LastEditTime: 2022-06-11 11:54:51
+ * @LastEditTime: 2022-06-13 13:30:07
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\api\loginRegister\register.go
+ * @FilePath: \blog\server\api\loginRegister\register.go
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -27,12 +27,11 @@ func Register(c *gin.Context) {
 	password := c.PostForm("password")
 	email := c.PostForm("email")
 	if strings.Trim(username, "") != "" && strings.Trim(password, "") != "" && strings.Trim(email, "") != "" {
-		var user models.User
 		res := global.
 			DB.
 			Where("Username = ?", username).
 			Or("Email = ?", email).
-			First(&user)
+			Find(&models.User{})
 		if res.RowsAffected == 0 {
 			addUser := models.User{
 				Username: username,
