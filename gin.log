@@ -25,6 +25,8 @@
 [GIN-debug] POST   /api/updatePicture        --> blog/api/pictureWall.UpdatePicture (5 handlers)
 [GIN-debug] GET    /api/deletePicture        --> blog/api/pictureWall.DeletePicture (5 handlers)
 [GIN-debug] POST   /api/tags/add             --> blog/api/tags.AddTags (5 handlers)
+[GIN-debug] GET    /api/socket               --> blog/api/socket.Socket (5 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :80
+[GIN] 2022/06/14 - 14:19:51 | 200 |    6.1384936s |       127.0.0.1 | GET      "/api/socket"

@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-09 10:16:49
- * @LastEditTime: 2022-06-09 13:04:18
+ * @LastEditTime: 2022-06-14 10:52:11
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\setupRouter\routerWithAuth.go
+ * @FilePath: \blog\server\setupRouter\routerWithAuth.go
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -25,4 +25,5 @@ func SetupRouterWithAuth(r *gin.Engine) {
 	routers.UploadRouterInit(r)      //文件上传
 	routers.PictureWallRouterInit(r) //图片墙
 	routers.TagsRouterInit(r)        //标签
+	routers.SocketRouterInit(r)      //websocket
 }

@@ -1,16 +1,16 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 20:36:31
- * @LastEditTime: 2022-06-09 16:16:12
+ * @LastEditTime: 2022-06-14 10:25:51
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\setupRouter\setupRouter.go
+ * @FilePath: \blog\server\setupRouter\setupRouter.go
  */
 
 package setupRouter
 
 import (
-	"blog/setting"
+	"blog/global"
 	"fmt"
 	"io"
 	"net/http"
@@ -35,6 +35,6 @@ func SetupRouter() *gin.Engine {
 	SetupRouterWithAuth(r)
 	fmt.Println("💞🎈🎐路由初始化成功")
 	// 服务
-	r.Run(setting.ServerPort)
+	r.Run(global.Config.Servers.Port)
 	return r
 }
