@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-18 16:49:14
- * @LastEditTime: 2022-02-18 17:00:32
+ * @LastEditTime: 2022-06-23 18:41:35
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \go-study\src\utils\md5.go
+ * @FilePath: \blog\server\utils\md5.go
  */
 package utils
 
@@ -14,6 +14,7 @@ import (
 	"io"
 )
 
+// MD5加密
 func MD5(str string) string {
 	h := md5.New()
 	io.WriteString(h, str)

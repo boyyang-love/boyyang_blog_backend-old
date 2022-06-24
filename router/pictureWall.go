@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-03 09:04:46
- * @LastEditTime: 2022-06-10 15:41:13
+ * @LastEditTime: 2022-06-22 13:44:23
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\router\pictureWall.go
+ * @FilePath: \blog\server\router\pictureWall.go
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -23,5 +23,6 @@ func PictureWallRouterInit(r *gin.Engine) {
 		pictureWallRouters.GET("getPictures", api.GetPicture)
 		pictureWallRouters.POST("updatePicture", api.UpdatePicture)
 		pictureWallRouters.GET("deletePicture", api.DeletePicture)
+		pictureWallRouters.GET("thumbsUpPicture", api.ThumbsUpPicture)
 	}
 }

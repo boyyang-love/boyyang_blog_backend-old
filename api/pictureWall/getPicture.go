@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:18:03
- * @LastEditTime: 2022-06-10 15:38:52
+ * @LastEditTime: 2022-06-24 11:30:41
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\api\pictureWall\getPicture.go
+ * @FilePath: \blog\server\api\pictureWall\getPicture.go
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 package api
@@ -35,6 +35,7 @@ func GetPicture(c *gin.Context) {
 			Order("id desc").
 			Preload("Author").
 			Preload("Tags").
+			Preload("ThumbsUpList").
 			Where("type = ? and hidden = ? and status = ?", imagesTypes, imagesHidden, imagesStatus).
 			Find(&pictures).
 			Count(&count).
@@ -47,6 +48,7 @@ func GetPicture(c *gin.Context) {
 			Offset((page-1)*limit).
 			Preload("Author").
 			Preload("Tags").
+			Preload("ThumbsUpList").
 			Where("type = ? and hidden = ? and status = ?", imagesTypes, imagesHidden, imagesStatus).
 			Find(&pictures).
 			Limit(-1).
