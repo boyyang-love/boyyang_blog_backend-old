@@ -1,5 +1,8 @@
 FROM golang:1.13 as builder
 
+ENV GO111MODULE = on
+ENV GOPROXY = https://goproxy.cn,direct
+
 RUN mkdir /app
 
 ADD . /app/
