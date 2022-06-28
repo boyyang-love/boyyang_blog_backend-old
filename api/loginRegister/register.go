@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:11:28
- * @LastEditTime: 2022-06-13 13:30:07
+ * @LastEditTime: 2022-06-28 18:24:32
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\api\loginRegister\register.go
@@ -26,7 +26,9 @@ func Register(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
 	email := c.PostForm("email")
-	if strings.Trim(username, "") != "" && strings.Trim(password, "") != "" && strings.Trim(email, "") != "" {
+	if strings.Trim(username, "") != "" &&
+		strings.Trim(password, "") != "" &&
+		strings.Trim(email, "") != "" {
 		res := global.
 			DB.
 			Where("Username = ?", username).
@@ -43,7 +45,28 @@ func Register(c *gin.Context) {
 				Create(&addUser).
 				Error
 			if err == nil {
-				setupSendEmail.SendEmail(email, "个人博客网站注册", "注册成功")
+				var pics []models.PictureWall
+				urls := []string{}
+				err = global.
+					DB.
+					Model(&models.PictureWall{}).
+					Limit(20).
+					Find(&pics).
+					Limit(-1).
+					Error
+				if err == nil {
+					for _, pic := range pics {
+						urls = append(urls, pic.Url)
+					}
+				}
+				setupSendEmail.SendEmail(
+					[]string{email},
+					"个人博客网站注册",
+					setupSendEmail.EmailContent{
+						Name: addUser.Username,
+						Urls: urls,
+					},
+				)
 				c.JSON(
 					http.StatusOK,
 					utils.Msg(utils.Message{Code: 1, Msg: "注册成功"}),

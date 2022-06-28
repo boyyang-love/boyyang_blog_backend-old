@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-03 00:02:39
- * @LastEditTime: 2022-06-24 11:28:34
+ * @LastEditTime: 2022-06-28 13:57:35
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\models\pictureWalls.go
@@ -10,10 +10,16 @@
 
 package models
 
-import "github.com/jinzhu/gorm"
+import (
+	"time"
+)
 
 type PictureWall struct {
-	gorm.Model
+	// gorm.Model
+	ID           uint        `gorm:"primary_key" json:"id"`
+	CreatedAt    time.Time   `json:"created_at"`
+	UpdatedAt    time.Time   `json:"updated_at"`
+	DeletedAt    *time.Time  `sql:"index" json:"deleted_at"`
 	Url          string      `json:"url" form:"url"`                                                    //图片地址
 	FileName     string      `json:"file_name" form:"file_name"`                                        //图片名称
 	Name         string      `json:"name" form:"name"`                                                  //名称
