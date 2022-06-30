@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-23 17:00:17
- * @LastEditTime: 2022-06-28 13:58:46
+ * @LastEditTime: 2022-06-30 08:50:24
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\models\imagesTags.go
@@ -14,7 +14,7 @@ import "time"
 
 type ImagesTag struct {
 	// gorm.Model
-	ID            uint       `gorm:"primary_key" json:"id"`
+	ID            uint       `gorm:"primary_key" json:"id" form:"id"`
 	CreatedAt     time.Time  `json:"created_at"`
 	UpdatedAt     time.Time  `json:"updated_at"`
 	DeletedAt     *time.Time `sql:"index" json:"deleted_at"`

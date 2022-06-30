@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-14 10:43:46
- * @LastEditTime: 2022-06-10 19:23:08
+ * @LastEditTime: 2022-06-30 08:34:05
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\setupDatabase\mysql.go
+ * @FilePath: \blog\server\setupDatabase\mysql.go
  */
 package setupDatabase
 
@@ -25,14 +25,16 @@ func SetupDB() *gorm.DB {
 	database := mysqlConfig.Database
 	username := mysqlConfig.Username
 	password := mysqlConfig.Password
+	timeout := mysqlConfig.Timeout
 	charset := "utf8"
-	args := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=true",
+	args := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=true&writeTimeout=%s",
 		username,
 		password,
 		host,
 		port,
 		database,
 		charset,
+		timeout,
 	)
 	var err error
 	global.DB, err = gorm.Open(driverName, args)

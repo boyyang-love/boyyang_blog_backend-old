@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-24 09:49:37
- * @LastEditTime: 2022-06-28 13:59:00
+ * @LastEditTime: 2022-06-30 08:50:35
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\models\thumbsUp.go
@@ -13,7 +13,7 @@ import "time"
 
 type ThumbsUp struct {
 	// gorm.Model
-	ID         uint       `gorm:"primary_key" json:"id"`
+	ID         uint       `gorm:"primary_key" json:"id" form:"id"`
 	CreatedAt  time.Time  `json:"created_at"`
 	UpdatedAt  time.Time  `json:"updated_at"`
 	DeletedAt  *time.Time `sql:"index" json:"deleted_at"`

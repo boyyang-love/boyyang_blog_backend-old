@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-10 17:02:27
- * @LastEditTime: 2022-06-10 18:36:47
+ * @LastEditTime: 2022-06-30 08:33:56
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\config\mysql.go
+ * @FilePath: \blog\server\config\mysql.go
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -16,4 +16,5 @@ type Mysql struct {
 	Username string `mapstructure:"username" json:"username" yaml:"username"`
 	Password string `mapstructure:"password" json:"password" yaml:"password"`
 	Database string `mapstructure:"database" json:"database" yaml:"database"`
+	Timeout  string `mapstructure:"timeout" json:"timeout" yaml:"timeout"`
 }

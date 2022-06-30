@@ -10,6 +10,7 @@ mysql:
     username: 'root'
     password: 'zxgf8bTa'
     database: 'boyyang'
+    timeout: '10s'
 
 # 腾讯云对象存储
 cloudBase:

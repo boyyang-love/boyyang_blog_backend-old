@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:16:03
- * @LastEditTime: 2022-06-13 13:37:39
+ * @LastEditTime: 2022-06-30 08:53:12
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\api\pictureWall\updatePicture.go
@@ -14,6 +14,7 @@ import (
 	"blog/global"
 	"blog/models"
 	"blog/utils"
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -43,6 +44,7 @@ func UpdatePicture(c *gin.Context) {
 		Association("Tags").
 		Replace(form.Tags).
 		Error
+	fmt.Println(err)
 	if err == nil {
 		c.JSON(
 			http.StatusOK,
