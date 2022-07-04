@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-09 09:46:53
- * @LastEditTime: 2022-06-24 09:52:51
+ * @LastEditTime: 2022-07-03 13:11:34
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\setupDatabase\registerTables.go
@@ -24,5 +24,6 @@ func RegisterTables(db *gorm.DB) {
 		&models.PictureWall{},
 		&models.ImagesTag{},
 		&models.ThumbsUp{},
+		&models.Logger{},
 	)
 }
