@@ -15,6 +15,7 @@ WORKDIR /app
 
 COPY --from=builder /app/main .
 COPY --from=builder /app/config.yaml .
+COPY --from=builder /app/setupSendEmail/eamil.html .
 
 CMD ["/app/main"]
 
