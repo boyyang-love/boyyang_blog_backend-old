@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 20:36:31
- * @LastEditTime: 2022-07-03 13:45:43
+ * @LastEditTime: 2022-07-05 12:42:52
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\setupRouter\setupRouter.go
@@ -11,9 +11,7 @@ package setupRouter
 
 import (
 	"blog/global"
-	"io"
 	"net/http"
-	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -21,8 +19,8 @@ import (
 func SetupRouter() *gin.Engine {
 	// gin.DisableConsoleColor()
 	// 日志文件
-	f, _ := os.Create("gin.log")
-	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+	// f, _ := os.Create("gin.log")
+	// gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 	r := gin.Default()
 	// 文件资源存储位置
 	r.StaticFS("/assets", http.Dir("./assets"))
