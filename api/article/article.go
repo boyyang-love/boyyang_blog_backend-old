@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 10:20:47
- * @LastEditTime: 2022-06-10 15:38:02
+ * @LastEditTime: 2022-07-05 17:45:54
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\api\article\article.go
+ * @FilePath: \blog\server\api\article\article.go
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -77,7 +77,7 @@ func GetArticleDetail(c *gin.Context) {
 // 添加文章
 func AddArticle(c *gin.Context) {
 	title := c.PostForm("title")
-	subtile := c.PostForm("subtitle")
+	subtitle := c.PostForm("subtitle")
 	content := c.PostForm("content")
 	image := c.PostForm("image")
 	token := c.Request.Header["Token"]
@@ -88,13 +88,13 @@ func AddArticle(c *gin.Context) {
 	}
 	if len(title) == 0 {
 		c.JSON(
-			http.StatusOK,
+			http.StatusBadRequest,
 			utils.Msg(utils.Message{Code: 0, Msg: "文章标题不能为空"}),
 		)
 	} else {
 		article := models.Article{
 			Title:    title,
-			Subtitle: subtile,
+			Subtitle: subtitle,
 			Image:    image,
 			Content:  content,
 			UserID:   author_id,
@@ -110,7 +110,7 @@ func AddArticle(c *gin.Context) {
 			)
 		} else {
 			c.JSON(
-				http.StatusOK,
+				http.StatusBadRequest,
 				utils.Msg(utils.Message{Code: 0, Msg: "文章添加失败"}),
 			)
 		}
@@ -132,7 +132,7 @@ func DelArticle(c *gin.Context) {
 		)
 	} else {
 		c.JSON(
-			http.StatusOK,
+			http.StatusBadRequest,
 			utils.Msg(utils.Message{Code: 0, Msg: "删除失败", Error: err}),
 		)
 	}
