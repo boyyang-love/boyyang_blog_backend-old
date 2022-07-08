@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-10 11:01:13
- * @LastEditTime: 2022-06-28 17:14:14
+ * @LastEditTime: 2022-07-08 09:55:44
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\setupSendEmail\setupSendMail.go
@@ -15,7 +15,6 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
-	"log"
 	"net/smtp"
 
 	"github.com/jordan-wright/email"
@@ -26,12 +25,12 @@ type EmailContent struct {
 	Urls []string
 }
 
-func SendEmail(to []string, title string, content EmailContent) {
+func SendEmail(to []string, title string, content EmailContent) (msg string, err error) {
 	// 获取html文件
 	t, err := template.ParseFiles("./setupSendEmail/email.html")
 	if err != nil {
 		fmt.Println("create template failed, err:", err)
-		return
+		return "读取html文件失败", err
 	}
 	data := content
 	buf := new(bytes.Buffer)
@@ -49,6 +48,7 @@ func SendEmail(to []string, title string, content EmailContent) {
 		smtp.PlainAuth("", emailConfig.From, emailConfig.SmtpKey, "smtp.qq.com"),
 	)
 	if err != nil {
-		log.Fatal(err)
+		return "邮件发送失败", err
 	}
+	return "邮件发送成功", nil
 }
