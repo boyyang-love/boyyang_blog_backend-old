@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:11:28
- * @LastEditTime: 2022-07-08 10:01:30
+ * @LastEditTime: 2022-07-08 14:07:14
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\api\loginRegister\register.go
@@ -13,7 +13,6 @@ package api
 import (
 	"blog/global"
 	"blog/models"
-	"blog/setupSendEmail"
 	"blog/utils"
 	"net/http"
 	"strings"
@@ -45,44 +44,10 @@ func Register(c *gin.Context) {
 				Create(&addUser).
 				Error
 			if err == nil {
-				var pics []models.PictureWall
-				urls := []string{}
-				err = global.
-					DB.
-					Model(&models.PictureWall{}).
-					Limit(20).
-					Find(&pics).
-					Limit(-1).
-					Error
-				if err == nil {
-					for _, pic := range pics {
-						urls = append(urls, pic.Url)
-					}
-					msg, err := setupSendEmail.SendEmail(
-						[]string{email},
-						"个人博客网站注册",
-						setupSendEmail.EmailContent{
-							Name: addUser.Username,
-							Urls: urls,
-						},
-					)
-					if err != nil {
-						c.JSON(
-							http.StatusBadRequest,
-							utils.Msg(utils.Message{Code: 0, Msg: msg, Error: err}),
-						)
-					} else {
-						c.JSON(
-							http.StatusOK,
-							utils.Msg(utils.Message{Code: 1, Msg: "注册成功"}),
-						)
-					}
-				} else {
-					c.JSON(
-						http.StatusBadRequest,
-						utils.Msg(utils.Message{Code: 0, Msg: "图片查询失败"}),
-					)
-				}
+				c.JSON(
+					http.StatusOK,
+					utils.Msg(utils.Message{Code: 1, Msg: "注册成功"}),
+				)
 			} else {
 				c.JSON(
 					http.StatusBadRequest,
