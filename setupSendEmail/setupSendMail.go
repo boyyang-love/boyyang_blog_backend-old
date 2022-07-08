@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-10 11:01:13
- * @LastEditTime: 2022-07-08 09:55:44
+ * @LastEditTime: 2022-07-08 10:19:31
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\setupSendEmail\setupSendMail.go
@@ -34,7 +34,10 @@ func SendEmail(to []string, title string, content EmailContent) (msg string, err
 	}
 	data := content
 	buf := new(bytes.Buffer)
-	t.Execute(buf, data)
+	err = t.Execute(buf, data)
+	if err != nil {
+		return "模板渲染失败", err
+	}
 	emailConfig := global.Config.Email
 	e := &email.Email{
 		From:    emailConfig.From,
