@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:11:28
- * @LastEditTime: 2022-07-07 19:40:30
+ * @LastEditTime: 2022-07-08 09:10:05
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\api\loginRegister\register.go
@@ -58,19 +58,24 @@ func Register(c *gin.Context) {
 					for _, pic := range pics {
 						urls = append(urls, pic.Url)
 					}
+					setupSendEmail.SendEmail(
+						[]string{email},
+						"个人博客网站注册",
+						setupSendEmail.EmailContent{
+							Name: addUser.Username,
+							Urls: urls,
+						},
+					)
+					c.JSON(
+						http.StatusOK,
+						utils.Msg(utils.Message{Code: 1, Msg: "注册成功"}),
+					)
+				} else {
+					c.JSON(
+						http.StatusBadRequest,
+						utils.Msg(utils.Message{Code: 0, Msg: "图片查询失败"}),
+					)
 				}
-				setupSendEmail.SendEmail(
-					[]string{email},
-					"个人博客网站注册",
-					setupSendEmail.EmailContent{
-						Name: addUser.Username,
-						Urls: urls,
-					},
-				)
-				c.JSON(
-					http.StatusOK,
-					utils.Msg(utils.Message{Code: 1, Msg: "注册成功"}),
-				)
 			} else {
 				c.JSON(
 					http.StatusBadRequest,
