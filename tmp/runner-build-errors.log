@@ -1,4 +1,2 @@
-# blog/api/loginRegister
-api\loginRegister\register.go:62:4: syntax error: unexpected else at end of statement
-api\loginRegister\register.go:65:77: syntax error: unexpected ) at end of statement
-api\loginRegister\register.go:68:1: syntax error: non-declaration statement outside function body
+# blog/router
+router\pictureWall.go:23:41: undefined: "blog/api/pictureWall".GetPicture

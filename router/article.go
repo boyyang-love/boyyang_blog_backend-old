@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 10:19:41
- * @LastEditTime: 2022-06-10 15:40:46
+ * @LastEditTime: 2022-07-11 13:04:05
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\router\article.go
+ * @FilePath: \blog\server\router\article.go
  */
 
 package routers
@@ -18,10 +18,10 @@ import (
 func AritcleRouterInit(r *gin.Engine) {
 	articleRouters := r.Group("api")
 	{
-		articleRouters.GET("articles", api.GetArticles)
-		articleRouters.GET("articlesDetail", api.GetArticleDetail)
+		articleRouters.GET("articles", api.Articles)
+		articleRouters.GET("articlesDetail", api.ArticleDetail)
 		articleRouters.POST("addArticle", api.AddArticle)
 		articleRouters.POST("delArticle", api.DelArticle)
-		articleRouters.GET("thumbsUp", api.ThumbsUp)
+		articleRouters.GET("thumbsUpArticle", api.ThumbsUpArticle)
 	}
 }
