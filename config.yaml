@@ -1,6 +1,5 @@
-# 服务配置
+# 服务端口配置
 servers:
-    host: 'http://localhost'
     port: ':80'
 
 # mysql 配置

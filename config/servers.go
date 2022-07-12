@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-14 10:14:11
- * @LastEditTime: 2022-06-14 10:20:39
+ * @LastEditTime: 2022-07-11 13:29:00
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\config\servers.go
@@ -11,6 +11,5 @@
 package config
 
 type Servers struct {
-	Host string `mapstructure:"host" json:"host" yaml:"host"`
 	Port string `mapstructure:"port" json:"port" yaml:"port"`
 }

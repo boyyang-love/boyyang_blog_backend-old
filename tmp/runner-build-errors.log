@@ -1,2 +1,0 @@
-# blog/router
-router\pictureWall.go:23:41: undefined: "blog/api/pictureWall".GetPicture
