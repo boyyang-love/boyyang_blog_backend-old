@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-02 17:41:11
- * @LastEditTime: 2022-07-03 13:44:53
+ * @LastEditTime: 2022-07-12 19:23:48
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\middleware\logger.go
@@ -14,7 +14,6 @@ import (
 	"blog/global"
 	"blog/models"
 	"blog/utils"
-	"fmt"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -41,7 +40,6 @@ func Logger() gin.HandlerFunc {
 			Status:        c.Writer.Status(),
 			UserAgent:     c.Request.UserAgent(),
 		}
-		fmt.Println(log)
 		global.DB.Create(&log)
 	}
 }
