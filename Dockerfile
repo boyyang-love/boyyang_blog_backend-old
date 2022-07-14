@@ -17,10 +17,6 @@ COPY --from=builder /app/main .
 COPY --from=builder /app/config.yaml .
 COPY --from=builder /app/setupSendEmail/email.html /app/setupSendEmail/email.html 
 
-# EXPOSE 80
-EXPOSE 25
-EXPOSE 465
-
 CMD ["/app/main"]
 
 

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-09 10:16:49
- * @LastEditTime: 2022-06-14 10:52:11
+ * @LastEditTime: 2022-07-14 13:17:52
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\setupRouter\routerWithAuth.go
@@ -20,10 +20,12 @@ import (
 func SetupRouterWithAuth(r *gin.Engine) {
 	// 路由中间件 token验证
 	r.Use(middleware.TokenVerification())
-	routers.UserRouterInit(r)        //用户信息
-	routers.AritcleRouterInit(r)     //文章博客
-	routers.UploadRouterInit(r)      //文件上传
-	routers.PictureWallRouterInit(r) //图片墙
-	routers.TagsRouterInit(r)        //标签
-	routers.SocketRouterInit(r)      //websocket
+	routers.UserRouterInit(r)         //用户信息
+	routers.AritcleRouterInit(r)      //文章博客
+	routers.UploadRouterInit(r)       //文件上传
+	routers.PictureWallRouterInit(r)  //图片墙
+	routers.TagsRouterInit(r)         //标签
+	routers.SocketRouterInit(r)       //websocket
+	routers.LeaveMessageRouterInit(r) //留言
+	routers.PublicRouterInit(r)
 }
