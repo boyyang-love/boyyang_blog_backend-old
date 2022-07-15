@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 20:36:31
- * @LastEditTime: 2022-07-05 12:42:52
+ * @LastEditTime: 2022-07-15 18:19:38
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\setupRouter\setupRouter.go
@@ -33,7 +33,7 @@ func SetupRouter() *gin.Engine {
 	// 路由注册(需要鉴权)
 	SetupRouterWithAuth(r)
 	// 服务
-	r.Run(global.Config.Servers.Port)
+	r.Run(global.Config.Server.Port)
 	return r
 }
 

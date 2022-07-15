@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-10 17:56:21
- * @LastEditTime: 2022-06-14 10:15:03
+ * @LastEditTime: 2022-07-15 18:18:36
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\config\config.go
@@ -10,9 +10,9 @@
 
 package config
 
-type Server struct {
+type Config struct {
 	Mysql     Mysql     `mapstructure:"mysql" json:"mysql" yaml:"mysql"`
 	CloudBase CloudBase `mapstructure:"cloudBase" json:"cloud_base" yaml:"cloudBase"`
 	Email     Email     `mapstructure:"email" json:"email" yaml:"email"`
-	Servers   Servers   `mapstructure:"servers" json:"servers" yaml:"servers"`
+	Server    Server    `mapstructure:"server" json:"server" yaml:"server"`
 }

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-11 12:50:25
- * @LastEditTime: 2022-07-11 13:03:02
+ * @LastEditTime: 2022-07-15 18:00:30
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\api\article\getArticles.go
@@ -22,13 +22,11 @@ import (
 
 // 获取所有文章
 func Articles(c *gin.Context) {
-	page := c.Query("page")
-	limit := c.Query("limit")
-	_page, _ := strconv.ParseInt(page, 10, 32)
-	_limit, _ := strconv.ParseInt(limit, 10, 32)
+	page, _ := strconv.Atoi(c.Query("page"))
+	limit, _ := strconv.Atoi(c.Query("limit"))
 	var articles []models.Article
 	var count int
-	if _page == 0 && _limit == 0 {
+	if page == 0 && limit == 0 {
 		global.
 			DB.
 			Preload("Author").
@@ -37,8 +35,8 @@ func Articles(c *gin.Context) {
 	} else {
 		global.
 			DB.
-			Limit(_limit).
-			Offset((_page - 1) * _limit).
+			Limit(limit).
+			Offset((page - 1) * limit).
 			Preload("Author").
 			Find(&articles).
 			Offset(-1).

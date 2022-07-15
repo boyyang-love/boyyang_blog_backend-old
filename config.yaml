@@ -1,5 +1,5 @@
 # 服务端口配置
-servers:
+server:
     port: ':80'
 
 # mysql 配置
