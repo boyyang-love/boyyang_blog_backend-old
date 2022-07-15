@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:19:09
- * @LastEditTime: 2022-06-11 13:06:31
+ * @LastEditTime: 2022-07-15 18:45:24
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\api\pictureWall\deletePicture.go
+ * @FilePath: \blog\server\api\pictureWall\deletePicture.go
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -59,5 +59,4 @@ func DeletePicture(c *gin.Context) {
 			)
 		}
 	}
-
 }

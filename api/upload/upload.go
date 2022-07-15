@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-16 17:27:10
- * @LastEditTime: 2022-06-11 13:39:29
+ * @LastEditTime: 2022-07-15 18:54:03
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\api\upload\upload.go
+ * @FilePath: \blog\server\api\upload\upload.go
  */
 
 package api
@@ -34,6 +34,7 @@ func Upload(c *gin.Context) {
 	if err == nil {
 		path := fmt.Sprintf("/%d/%s/%s", claims.Id, "images", file.Filename)
 		f, _ := file.Open()
+		defer f.Close()
 		var err error
 		_, err = global.Client.Object.Put(context.Background(), path, f, opt)
 		if err != nil {
