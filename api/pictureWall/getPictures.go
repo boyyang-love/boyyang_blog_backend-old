@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:18:03
- * @LastEditTime: 2022-07-11 13:05:10
+ * @LastEditTime: 2022-07-15 17:02:56
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\api\pictureWall\getPictures.go
@@ -36,6 +36,8 @@ func GetPictures(c *gin.Context) {
 			Preload("Author").
 			Preload("Tags").
 			Preload("ThumbsUpList").
+			Preload("LeaveMessage").
+			Preload("LeaveMessage.User").
 			Where("type = ? and hidden = ? and status = ?", imagesTypes, imagesHidden, imagesStatus).
 			Find(&pictures).
 			Count(&count).
@@ -49,6 +51,8 @@ func GetPictures(c *gin.Context) {
 			Preload("Author").
 			Preload("Tags").
 			Preload("ThumbsUpList").
+			Preload("LeaveMessage").
+			Preload("LeaveMessage.User").
 			Where("type = ? and hidden = ? and status = ?", imagesTypes, imagesHidden, imagesStatus).
 			Find(&pictures).
 			Limit(-1).
