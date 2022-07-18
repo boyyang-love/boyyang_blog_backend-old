@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-11 12:50:25
- * @LastEditTime: 2022-07-15 18:00:30
+ * @LastEditTime: 2022-07-17 18:29:54
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\api\article\getArticles.go
@@ -29,12 +29,14 @@ func Articles(c *gin.Context) {
 	if page == 0 && limit == 0 {
 		global.
 			DB.
+			Order("created_at desc").
 			Preload("Author").
 			Find(&articles).
 			Count(&count)
 	} else {
 		global.
 			DB.
+			Order("created_at desc").
 			Limit(limit).
 			Offset((page - 1) * limit).
 			Preload("Author").

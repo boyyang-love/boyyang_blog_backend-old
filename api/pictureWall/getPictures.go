@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:18:03
- * @LastEditTime: 2022-07-15 17:02:56
+ * @LastEditTime: 2022-07-18 16:09:41
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\api\pictureWall\getPictures.go
@@ -32,7 +32,7 @@ func GetPictures(c *gin.Context) {
 	if page == 0 && limit == 0 {
 		err = global.
 			DB.
-			Order("id desc").
+			Order("created_at desc").
 			Preload("Author").
 			Preload("Tags").
 			Preload("ThumbsUpList").
@@ -45,7 +45,7 @@ func GetPictures(c *gin.Context) {
 	} else {
 		err = global.
 			DB.
-			Order("id desc").
+			Order("created_at desc").
 			Limit(limit).
 			Offset((page-1)*limit).
 			Preload("Author").

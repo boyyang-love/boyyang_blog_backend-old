@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:14:29
- * @LastEditTime: 2022-06-11 18:38:40
+ * @LastEditTime: 2022-07-18 14:44:27
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\api\pictureWall\uploadPicture.go
+ * @FilePath: \blog\server\api\pictureWall\uploadPicture.go
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 package api
@@ -28,7 +28,7 @@ func UploadPicture(c *gin.Context) {
 	c.ShouldBind(&form)
 	form.UserID = claims.Id
 	// tags
-	if strings.Trim(tags, " ") != "" {
+	if strings.Trim(tags, "") != "" {
 		splitTags := strings.Split(tags, ",")
 		for _, tag := range splitTags {
 			form.Tags = append(form.Tags, models.ImagesTag{

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-03 11:16:03
- * @LastEditTime: 2022-07-14 09:18:24
+ * @LastEditTime: 2022-07-18 14:45:37
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\api\pictureWall\updatePicture.go
@@ -24,7 +24,6 @@ import (
 func UpdatePicture(c *gin.Context) {
 	tags := c.PostForm("tags")
 	var form models.PictureWall
-	var picture models.PictureWall
 	c.ShouldBind(&form)
 	// tags
 	if strings.Trim(tags, "") != "" {
@@ -38,7 +37,7 @@ func UpdatePicture(c *gin.Context) {
 	err := global.
 		DB.
 		Omit("Author").
-		Model(&picture).
+		Model(&models.PictureWall{}).
 		Update(&form).
 		Association("Tags").
 		Replace(form.Tags).
@@ -46,7 +45,7 @@ func UpdatePicture(c *gin.Context) {
 	if err == nil {
 		c.JSON(
 			http.StatusOK,
-			utils.Msg(utils.Message{Code: 1, Msg: "更新成功", Data: picture}),
+			utils.Msg(utils.Message{Code: 1, Msg: "更新成功"}),
 		)
 	} else {
 		c.JSON(
