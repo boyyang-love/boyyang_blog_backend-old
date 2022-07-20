@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-03 09:04:46
- * @LastEditTime: 2022-07-11 13:07:31
+ * @LastEditTime: 2022-07-20 14:05:48
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\server\router\pictureWall.go
@@ -24,5 +24,6 @@ func PictureWallRouterInit(r *gin.Engine) {
 		pictureWallRouters.POST("updatePicture", api.UpdatePicture)
 		pictureWallRouters.GET("deletePicture", api.DeletePicture)
 		pictureWallRouters.GET("thumbsUpPicture", api.ThumbsUpPicture)
+		pictureWallRouters.GET("imageReview", api.ImageReview)
 	}
 }
