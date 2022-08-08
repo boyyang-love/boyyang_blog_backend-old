@@ -10,11 +10,7 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
 	github.com/tencentyun/cos-go-sdk-v5 v0.7.36
-)
-
-require github.com/goccy/go-json v0.9.7 // indirect
-
-require (
+	github.com/goccy/go-json v0.9.10 // indirect
 	github.com/PuerkitoBio/goquery v1.8.0 // indirect
 	github.com/andybalholm/cascadia v1.3.1 // indirect
 	github.com/antchfx/htmlquery v1.2.5 // indirect
