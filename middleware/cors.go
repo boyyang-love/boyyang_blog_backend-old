@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:41:57
- * @LastEditTime: 2022-06-09 16:39:28
+ * @LastEditTime: 2022-08-09 09:44:41
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\middleware\cors.go
+ * @FilePath: \blog\server\middleware\cors.go
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -24,7 +24,7 @@ func Cors() gin.HandlerFunc {
 			//接收客户端发送的origin （重要！）
 			c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
 			//服务器支持的所有跨域请求的方法
-			c.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE,UPDATE")
+			c.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, UPDATE")
 			//允许跨域设置可以返回其他子段，可以自定义字段
 			c.Header("Access-Control-Allow-Headers", "Authorization, Content-Length, X-CSRF-Token, Token, session")
 			// 允许浏览器（客户端）可以解析的头部 （重要）
