@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-02-13 19:45:12
- * @LastEditTime: 2022-07-14 13:09:45
+ * @LastEditTime: 2022-08-10 16:52:50
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\server\main.go
+ * @FilePath: \blog_server\main.go
  */
 
 package main
@@ -12,9 +12,9 @@ package main
 import (
 	"blog/global"
 	"blog/setupClient"
-	setupDatabase "blog/setupDatabase"
-	setupRouter "blog/setupRouter"
-	setupViper "blog/setupViper"
+	"blog/setupDatabase"
+	"blog/setupRouter"
+	"blog/setupViper"
 )
 
 func main() {

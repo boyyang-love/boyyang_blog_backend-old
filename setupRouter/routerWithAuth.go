@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-09 10:16:49
- * @LastEditTime: 2022-07-14 13:17:52
+ * @LastEditTime: 2022-08-10 16:54:28
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\server\setupRouter\routerWithAuth.go
+ * @FilePath: \blog_server\setupRouter\routerWithAuth.go
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
